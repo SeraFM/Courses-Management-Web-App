@@ -69,10 +69,10 @@ public class ProfessorController {
         		}
         	}
         	System.out.println("Not Valid Username or Password. Please try again");
-        	return "login";
+        	return "redirect:/login";
         }else{
         	System.out.println("Not Valid Username or Password. Please try again");
-            return "login";
+            return "redirect:/login";
         }
     }
     
