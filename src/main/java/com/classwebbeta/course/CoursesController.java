@@ -52,8 +52,9 @@ public class CoursesController {
     
     @GetMapping("/students")
     public String getStudentsPage(Integer courseAttending, Model model) {
+        studentService.setCourseAttending(courseAttending);
     	List<Student> students = studentService.getByCourseAttending(courseAttending);
-    	System.out.println(students);
+    	//System.out.println(students);
         model.addAttribute("students", students);
         return "navigate_course_page";
     }

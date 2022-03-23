@@ -13,13 +13,39 @@ public class StudentService {
 	public StudentService(StudentRepository studentRepository) {
 		this.studentRepository = studentRepository;
 	}
+
+	Integer courseAttending;
+
+    public Integer getCourseAttending(){
+        return courseAttending;
+    }
+
+    public void setCourseAttending(Integer courseAttending){
+        this.courseAttending = courseAttending;
+    }
 	
-	public List<Student> getAll(Student student){
+	public List<Student> getAllStudents(Student student){
 		return studentRepository.findAll();
 	}
 	
 	public List<Student> getByCourseAttending(Integer courseAttending){
 		return studentRepository.findByCourseAttending(courseAttending);
+	}
+
+	public List<Student> getOneStudent(Integer studentid) {
+		return studentRepository.findStudentById(studentid);
+	}
+
+	public void updateStudent(Student student) {
+		studentRepository.save(student);
+	}
+	
+	public void addStudent(Student student) {
+		studentRepository.save(student);
+	}
+
+	public void deleteStudent(Integer studentid){
+		studentRepository.deleteById(studentid);
 	}
 	
 	
