@@ -1,6 +1,7 @@
-package com.classwebbeta.app;
+package com.classwebbeta;
 
 import java.io.IOException;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -21,6 +22,6 @@ public class ClassWebBetaApplication {
 	private static void openHomePage() throws IOException {
 	       Runtime rt = Runtime.getRuntime();
 	       rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8080/login");
-	    }
+	}
 
 }
