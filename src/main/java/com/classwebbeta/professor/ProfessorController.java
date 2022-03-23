@@ -14,20 +14,10 @@ import com.classwebbeta.course.CoursesService;
 
 @Controller
 public class ProfessorController {
-	
-	int error = 0;
-
-	public int getError() {
-		return error;
-	}
-	public void setError(int error) {
-		this.error = error;
-	}
 
 	@Autowired
     private final ProfessorService professorService;
-	
-	@Autowired
+    @Autowired
 	private final CoursesService coursesService;
 
     public ProfessorController(ProfessorService professorService, CoursesService coursesService ){
@@ -79,11 +69,9 @@ public class ProfessorController {
         		}
         	}
         	System.out.println("Not Valid Username or Password. Please try again");
-        	setError(1);
         	return "login";
         }else{
         	System.out.println("Not Valid Username or Password. Please try again");
-        	setError(1);
             return "login";
         }
     }
