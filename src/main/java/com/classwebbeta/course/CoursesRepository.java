@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CoursesRepository extends JpaRepository<CoursesModel,Integer> {
+public interface CoursesRepository extends JpaRepository<Course,Integer> {
  	
-	List<CoursesModel> findByProfessorid(Integer professorid);
+	// Find Courses that a professor teaches
+	List<Course> findByProfessorid(Integer professorid);
 	
 }

@@ -5,8 +5,6 @@ import java.time.Year;
 import java.util.Objects;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,8 +13,8 @@ import javax.persistence.Table;
 public class Student {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer studentid;
+
     private String fullname;
     private String email;
 	private Integer yearOfRegistration;
@@ -27,21 +25,6 @@ public class Student {
     private Double examGrade;
     private Integer courseAttending;
     
-    public Student() {}
-  
-	public Student(Integer studentid, String fullname, String email, Integer yearOfRegistration, Integer yearOfStudies, Integer syllabus, Integer semester, Double projectGrade, Double examGrade, Integer courseAttending) {
-		this.studentid = studentid;
-		this.fullname = fullname;
-		this.email = email;
-		this.yearOfRegistration = yearOfRegistration;
-		this.yearOfStudies = yearOfStudies;
-		this.syllabus = syllabus;
-		this.semester = semester;
-		this.projectGrade = projectGrade;
-		this.examGrade = examGrade;
-		this.courseAttending = courseAttending;
-	}
-	
 	public String getEmail() {
 		return email;
 	}
@@ -73,7 +56,7 @@ public class Student {
 		this.yearOfRegistration = yearOfRegistration;
 	}
 	public Integer getYearOfStudies() {
-		setYearOfStudies(0);
+		yearOfStudies = Year.now().getValue() - yearOfRegistration;
 		return yearOfStudies;
 	}
 	public void setYearOfStudies(Integer yearOfStudies) {
@@ -81,7 +64,7 @@ public class Student {
 		this.yearOfStudies = yearOfStudies;
 	}
 	public Integer getSyllabus() {
-		setSyllabus(0);
+		syllabus = Year.now().getValue() - yearOfRegistration;
 		return syllabus;
 	}
 	public void setSyllabus(Integer syllabus) {
@@ -89,7 +72,13 @@ public class Student {
 		this.syllabus = syllabus;
 	}
 	public Integer getSemester() {
-		setSemester(0);
+		LocalDate date = LocalDate.now();
+		int month = date.getMonthValue();
+		if (month >= 9 || month <= 1) {
+			semester = (syllabus*2) - 1;
+		}else {
+			semester = syllabus*2;
+		}
 		return semester;
 	}
 	public void setSemester(Integer semester) {

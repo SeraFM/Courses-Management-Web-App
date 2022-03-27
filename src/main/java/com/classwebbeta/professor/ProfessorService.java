@@ -15,11 +15,11 @@ public class ProfessorService {
         this.professorRepository = professorRepository;
     }
 
-    public ProfessorModel authenticate(String email, String password){
+    public Professor authenticate(String email, String password){
         return professorRepository.findByEmailAndPassword(email,password).orElse(null);
     }
     
-    public List<ProfessorModel> getAllProfessors() {
+    public List<Professor> getAllProfessors() {
     	return professorRepository.findAll();
     }
 	

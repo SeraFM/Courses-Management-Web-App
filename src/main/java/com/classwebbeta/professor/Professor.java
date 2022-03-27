@@ -5,8 +5,8 @@ import java.util.Objects;
 import javax.persistence.*;
 
 @Entity
-@Table(name="professor")
-public class ProfessorModel {
+@Table
+public class Professor {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,7 +65,7 @@ public class ProfessorModel {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProfessorModel other = (ProfessorModel) obj;
+		Professor other = (Professor) obj;
 		return Objects.equals(email, other.email) && Objects.equals(password, other.password)
 				&& Objects.equals(phoneNumber, other.phoneNumber) && Objects.equals(professorid, other.professorid)
 				&& Objects.equals(professorName, other.professorName) && Objects.equals(username, other.username);

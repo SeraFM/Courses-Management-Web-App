@@ -54,6 +54,8 @@
 			      <th scope="col">Year</th>
 			      <th scope="col">Syllabus</th>
 			      <th scope="col">Semester</th>
+				  <th scope="col">Exam Percentage</th>
+				  <th scope="col">Project Percentage</th>
 			      <th scope="col">Attendance</th>
 			      <th scope="col">Actions</th>
 			    </tr>
@@ -64,11 +66,13 @@
             		<td th:text="${course.year}"></td>
             		<td th:text="${course.syllabus}"></td>
             		<td th:text="${course.semester}"></td>
+					<td th:text="${course.examPR}"></td>
+					<td th:text="${course.projectPR}"></td>
             		<td th:text="${course.attendance}"></td>
             		<td>
-            			<a th:href="@{/courses/getOne/(courseid=${course.courseid})}" class="btn btn-sm btn-success" id="eBtn" ><img src="https://i.ibb.co/YcxKhdh/pencil-removebg-preview.png" width="30" /></a>
+            			<button data-bs-toggle="modal" th:attr="data-bs-target=${'#editModal' + course.courseid}" data-row="${course}" class="btn btn-sm btn-success"><img src="https://i.ibb.co/YcxKhdh/pencil-removebg-preview.png" width="30" /></button>
 
-            			<a th:action="@{/courses/delete/(courseid=${course.courseid})}" class="delBtn btn btn-sm btn-danger" id="delBtn"><img src="https://freesvg.org/img/trash.png" width="30" /></a>
+            			<button data-bs-toggle="modal" th:attr="data-bs-target=${'#deleteModal' + course.courseid}" data-row="${course}" class="btn btn-sm btn-danger"><img src="https://freesvg.org/img/trash.png" width="30" /></button>
 						
 						<a th:href="@{/courses/students/(courseAttending=${course.courseid})}" class="btn btn-sm btn-warning"><img src="https://i.ibb.co/r6mhLcW/Untitled-design-9-removebg-preview.png" width="30"></a>
             	    </td>
@@ -108,6 +112,9 @@
 			       		<label for="input" class="col-form-label">Semester</label>
 			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="semester">
 		       	
+						<label for="input" class="col-form-label">Exam Grade Percentage</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="examPR">
+						   
 			       		<label for="input" class="col-form-label">Attendance</label>
 			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="attendance">
 			      </div>
@@ -126,33 +133,31 @@
 
 
 <!-- The Modal Delete-->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+<div th:each="course : ${courses}" th:attr="id=${'deleteModal' + course.courseid}" class="modal fade" tabindex="-1" role="dialog">
+  <form th:action="@{/courses/deleteCourse/(courseid=${course.courseid})}" th:method="delete">
   	<div class="modal-dialog" role="document">
     	<div class="modal-content" style="background-color:#383434">
 		     <div class="modal-header">
-		        <h5 class="modal-title"></h5>
+				 Delete
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-		        	<span aria-hidden="treu">&times;</span>
+		        	<span aria-hidden="true">&times;</span>
 		        </button>
 		     </div>
 		     <div class="modal-body">
-		     	<p class="alert alert-danger">
-		     		Are you sure you want to delete this course?
-		     	</p>
+		     		Are you sure you want to delete: <div th:text="${course.name}" />
 		     </div>
 		     <div class="modal-footer">
 				 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-		     	 <a href="" class="btn btn-danger" id="delRef">Yes, Delete</a>
-		      </div>
-	
+		     	 <button type="submit" class="btn btn-danger">Yes, Delete</button>
+		     </div>
 	    </div>
 		</div>
+  </form>
 </div>
 
 
-<!--  th:attrappend="id=${course.courseid}" -->
-<div class="modal" id="editModal" role="dialog">
-  <form th:action="@{/courses/editCourse}" method="POST">
+<div th:each="course : ${courses}" th:attr="id=${'editModal' + course.courseid}" class="modal" role="dialog">
+  <form th:action="@{/courses/updateCourse/(courseid=${course.courseid})}" method="post">
     <div class="modal-dialog">
         <div class="modal-content" style="background-color:#383434">
               <div class="modal-header">
@@ -164,23 +169,26 @@
               <div class="modal-body" style="background-color:#383434">
                
                 
-                    <label for="courseidEdit" class="col-form-label">ID</label>
-                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="courseidEdit" name="courseid" value="" />
+                    <label for="courseid" class="col-form-label">ID</label>
+                    <input style="background-color:#CDCDCD" type="text" readonly="readonly" class="form-control" id="courseid" name="courseid" th:attr="value=${course.courseid}"/>
                 
-                    <label for="nameEdit" class="col-form-label">Name</label>
-                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="nameEdit" name="name" value="" />      
+                    <label for="name" class="col-form-label">Name</label>
+                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="name" name="name" th:attr="value=${course.name}" />      
                 
-                    <label for="yearEdit" class="col-form-label">Year</label>
-                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="yearEdit" name="year" value="" />
+                    <label for="year" class="col-form-label">Year</label>
+                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="year" name="year" th:attr="value=${course.year}" />
               
-                    <label for="syllabusEdit" class="col-form-label">Syllabus</label>
-                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="syllabusEdit" name="syllabus" value="" />
+                    <label for="syllabus" class="col-form-label">Syllabus</label>
+                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="syllabus" name="syllabus" th:attr="value=${course.syllabus}" />
 
-                    <label for="semesterEdit" class="col-form-label">Semester</label>
-                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="semesterEdit" name="semester" value="" />
-            
-                    <label for="attendanceEdit" class="col-form-label">Attendance</label>
-                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="attendanceEdit" name="attendance" value="" />
+                    <label for="semester" class="col-form-label">Semester</label>
+                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="semester" name="semester" th:attr="value=${course.semester}" />
+
+					<label for="examPR" class="col-form-label">Exam Grade Percentage</label>
+                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="examPR" name="examPR" th:attr="value=${course.examPR}" />
+
+                    <label for="attendance" class="col-form-label">Attendance</label>
+                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="attendance" name="attendance" th:attr="value=${course.attendance}" />
                     
                            
               </div>

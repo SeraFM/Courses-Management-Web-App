@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
 	
 	$('.table .eBtn').on('click', function(e){
 		
@@ -9,15 +9,15 @@ $(document).ready(function(){
 			var href = $(this).attr('href');
 		
 			$.get(href, function(course, status){
-				$('.editForm #courseid').val(course.courseid);
-				$('.editForm #name').val(course.name);
-				$('.editForm #year').val(course.year);
-				$('.editForm #syllabus').val(course.syllabus);
-				$('.editForm #semester').val(course.semester);
-				$('.editForm #attendance').val(course.attendance);
+				$('.editForm #courseidEdit').val(course.courseid);
+				$('.editForm #nameEdit').val(course.name);
+				$('.editForm #yearEdit').val(course.year);
+				$('.editForm #syllabusEdit').val(course.syllabus);
+				$('.editForm #semesterEdit').val(course.semester);
+				$('.editForm #attendanceEdit').val(course.attendance);
 			});
 		
-			$('.editForm #editModal').modal('show');
+			//$('.editForm #editModal').modal('show');
 		
        	 	
 	    } catch(ex) {
@@ -36,4 +36,4 @@ $(document).ready(function(){
 
 	});
 	
-});
+});*/

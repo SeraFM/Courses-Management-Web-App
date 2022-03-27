@@ -5,11 +5,13 @@ import java.util.Objects;
 
 @Entity
 @Table
-public class CoursesModel {
+public class Course {
+
+    // Creating table fields
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer courseid;
+
     private String name;
     private Integer year;
     private Integer syllabus;
@@ -18,8 +20,6 @@ public class CoursesModel {
     private Integer professorid;
     private Double examPR;
     private Double projectPR;
-    
-    
 
     public Integer getProfessorid() {
 		return professorid;
@@ -42,13 +42,15 @@ public class CoursesModel {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CoursesModel other = (CoursesModel) obj;
+		Course other = (Course) obj;
 		return Objects.equals(attendance, other.attendance) && Objects.equals(courseid, other.courseid)
 				&& Objects.equals(examPR, other.examPR) && Objects.equals(name, other.name)
 				&& Objects.equals(professorid, other.professorid) && Objects.equals(projectPR, other.projectPR)
 				&& Objects.equals(semester, other.semester) && Objects.equals(syllabus, other.syllabus)
 				&& Objects.equals(year, other.year);
 	}
+
+    // Getters and Setters
 
 	public Integer getCourseid() {
         return courseid;
@@ -107,10 +109,11 @@ public class CoursesModel {
 	}
 
 	public Double getProjectPR() {
+        projectPR = 1 - examPR;
 		return projectPR;
 	}
 
-	public void setProjectPR() {
+	public void setProjectPR(Double examPR) {
 		this.projectPR = 1 - examPR;
 	}
 

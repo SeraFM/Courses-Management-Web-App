@@ -3,7 +3,6 @@ package com.classwebbeta.course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CoursesService {
@@ -15,20 +14,19 @@ public class CoursesService {
 		this.coursesRepository = coursesRepository;
 	}
 
-	public List<CoursesModel> getAllCourses(Integer professorid) {
+	// Get all courses from the Course Repository by professor ID
+	public List<Course> getAllCourses(Integer professorid) {
         return coursesRepository.findByProfessorid(professorid);
     }
 	
-	public void updateCourse(CoursesModel coursesModel) {
-		coursesRepository.save(coursesModel);
+	// Update Course
+	public void updateCourse(Course course) {
+		coursesRepository.save(course);
 	}
 	
-	public void addCourse(CoursesModel coursesModel) {
-		coursesRepository.save(coursesModel);
-	}
-	
-	public Optional<CoursesModel> getOne(Integer courseid) {
-		return coursesRepository.findById(courseid);
+	// Add Course
+	public void addCourse(Course course) {
+		coursesRepository.save(course);
 	}
 	
 	private Integer professorID;
@@ -37,6 +35,7 @@ public class CoursesService {
 		return professorID;
 	}
 
+	// Delete Course
 	public void deleteCourse(Integer courseid) {
 		coursesRepository.deleteById(courseid);
 	}
@@ -45,5 +44,4 @@ public class CoursesService {
 		this.professorID = professorID;
 	}
 
-	
 }

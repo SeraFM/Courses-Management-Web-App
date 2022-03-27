@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.classwebbeta.course.CoursesModel;
+import com.classwebbeta.course.Course;
 import com.classwebbeta.course.CoursesService;
 
 
@@ -28,7 +28,7 @@ public class ProfessorController {
 
 	@GetMapping("/login")
     public String getLoginPage(Model model) {
-        model.addAttribute("loginRequest", new ProfessorModel());
+        model.addAttribute("loginRequest", new Professor());
         return "login";
     }
     
@@ -49,17 +49,17 @@ public class ProfessorController {
     // SHOW ALL PROFESSOR COURSES
     @GetMapping("/courses")
     public String getCoursesPage(Model model) {
-    	List<CoursesModel> coursesModel = coursesService.getAllCourses(coursesService.getProfessorID());
-        model.addAttribute("courses", coursesModel);
+    	List<Course> course = coursesService.getAllCourses(coursesService.getProfessorID());
+        model.addAttribute("courses", course);
         return "courses_page";
     }
     
     @PostMapping("/login")
-    public String login(@ModelAttribute ProfessorModel professorModel, Model model) {
+    public String login(@ModelAttribute Professor professorModel, Model model) {
         System.out.println("Login Request: " + "Email: " + professorModel.getEmail() + "  Password: ********");
-        ProfessorModel authenticated = professorService.authenticate(professorModel.getEmail(), professorModel.getPassword());
+        Professor authenticated = professorService.authenticate(professorModel.getEmail(), professorModel.getPassword());
         if(authenticated!=null) {
-        	List<ProfessorModel> all = professorService.getAllProfessors();
+        	List<Professor> all = professorService.getAllProfessors();
         	for(int i=0; i<all.size(); i++){
         		if((all.get(i).getEmail()).equals(authenticated.getEmail())) {
         			System.out.println("Loged in as: " + all.get(i).toString());

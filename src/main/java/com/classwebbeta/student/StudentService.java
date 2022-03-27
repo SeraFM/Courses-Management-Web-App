@@ -24,16 +24,8 @@ public class StudentService {
         this.courseAttending = courseAttending;
     }
 	
-	public List<Student> getAllStudents(Student student){
-		return studentRepository.findAll();
-	}
-	
 	public List<Student> getByCourseAttending(Integer courseAttending){
 		return studentRepository.findByCourseAttending(courseAttending);
-	}
-
-	public List<Student> getOneStudent(Integer studentid) {
-		return studentRepository.findStudentById(studentid);
 	}
 
 	public void updateStudent(Student student) {

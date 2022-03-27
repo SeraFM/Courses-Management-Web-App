@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProfessorRepository extends JpaRepository<ProfessorModel, Integer>{
+public interface ProfessorRepository extends JpaRepository<Professor, Integer>{
 
-	Optional<ProfessorModel> findByEmailAndPassword(String email, String password);
+	Optional<Professor> findByEmailAndPassword(String email, String password);
 	
 }
