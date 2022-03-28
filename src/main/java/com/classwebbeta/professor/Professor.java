@@ -8,8 +8,8 @@ import javax.persistence.*;
 @Table
 public class Professor {
 
+	// Table Fields
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer professorid;
     private String professorName;
     private String username;
@@ -17,6 +17,7 @@ public class Professor {
     private String email;
     private String phoneNumber;
     
+	// Getters and Setters
 	public Integer getProfessorid() {
 		return professorid;
 	}

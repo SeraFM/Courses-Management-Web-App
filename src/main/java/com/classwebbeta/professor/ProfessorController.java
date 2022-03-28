@@ -25,28 +25,29 @@ public class ProfessorController {
 		this.coursesService = coursesService;
     }
     
-
+    // Go to the Login URL with HTTP Request GetMapping
 	@GetMapping("/login")
     public String getLoginPage(Model model) {
+        // Add to the Model the Email and Password from the user trying to login
         model.addAttribute("loginRequest", new Professor());
         return "login";
     }
     
-    
+    // Go to Home page URL 
     @GetMapping("/home")
     public String getHomePage(Model model) {
         model.addAttribute("homeNav");
         return "home_page";
     }
     
-    
+    // Go to About page URL
     @GetMapping("/about")
     public String getAboutPage(Model model) {
         model.addAttribute("aboutNav");
         return "about_page";
     }  
     
-    // SHOW ALL PROFESSOR COURSES
+    // Go to courses URL and diplsay all courses of the Instructor that loged in succesfully
     @GetMapping("/courses")
     public String getCoursesPage(Model model) {
     	List<Course> course = coursesService.getAllCourses(coursesService.getProfessorID());
@@ -54,13 +55,17 @@ public class ProfessorController {
         return "courses_page";
     }
     
+    // Get the login Email-Passowrd inputs from user and check if they are in the database so the user(instructor) can navigate to home page
     @PostMapping("/login")
     public String login(@ModelAttribute Professor professorModel, Model model) {
+        // Print the login request from user
         System.out.println("Login Request: " + "Email: " + professorModel.getEmail() + "  Password: ********");
+        // Calling a method to check if the inputs are in the database
         Professor authenticated = professorService.authenticate(professorModel.getEmail(), professorModel.getPassword());
         if(authenticated!=null) {
         	List<Professor> all = professorService.getAllProfessors();
         	for(int i=0; i<all.size(); i++){
+                // if is true then navigate to home page
         		if((all.get(i).getEmail()).equals(authenticated.getEmail())) {
         			System.out.println("Loged in as: " + all.get(i).toString());
         			coursesService.setProfessorID(all.get(i).getProfessorid());

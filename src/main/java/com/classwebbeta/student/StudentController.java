@@ -18,6 +18,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    // Add new Student. Post Request to get the data from the Add Student form and put it in the Repository(database)
     @PostMapping("/addStudent")
     public String addStudent(Student student) {
     	student.setCourseAttending(studentService.getCourseAttending());
@@ -29,6 +30,7 @@ public class StudentController {
     	return "redirect:/courses/students/?courseAttending=" + studentService.getCourseAttending();
     }
     
+    // Update Student. Post Request to get the data from the Update Student form and put it in the Repository(database)
     @PostMapping(value="/updateStudent")
     public String updateStudent(Student student) {
       student.setCourseAttending(studentService.getCourseAttending());
@@ -39,6 +41,7 @@ public class StudentController {
     	return "redirect:/courses/students/?courseAttending=" + studentService.getCourseAttending();
     }
       
+    // Delete Student by ID 
     @DeleteMapping(value="/delete")
     public String deleteStudent(Integer studentid) {
     	studentService.deleteStudent(studentid);

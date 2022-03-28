@@ -15,10 +15,12 @@ public class ProfessorService {
         this.professorRepository = professorRepository;
     }
 
+    // Check if user login is valid (is in the database)  
     public Professor authenticate(String email, String password){
         return professorRepository.findByEmailAndPassword(email,password).orElse(null);
     }
     
+    // Get all professors from the repository
     public List<Professor> getAllProfessors() {
     	return professorRepository.findAll();
     }

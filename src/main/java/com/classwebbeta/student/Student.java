@@ -12,6 +12,7 @@ import javax.persistence.Table;
 @Table
 public class Student {
 
+	// Database Table Fields
 	@Id
     private Integer studentid;
 
@@ -25,6 +26,7 @@ public class Student {
     private Double examGrade;
     private Integer courseAttending;
     
+	// Getters and Setters
 	public String getEmail() {
 		return email;
 	}
