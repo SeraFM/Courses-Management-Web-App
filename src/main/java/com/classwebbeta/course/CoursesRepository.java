@@ -10,5 +10,7 @@ public interface CoursesRepository extends JpaRepository<Course,Integer> {
  	
 	// Find Courses that a professor teaches
 	List<Course> findByProfessorid(Integer professorid);
+	// Find Course by ID
+	List<Course> findByCourseid(Integer courseid);
 	
 }

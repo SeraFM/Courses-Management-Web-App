@@ -39,6 +39,8 @@ public class CoursesController {
     public String updateCourse(Course course) {
         // Set course Professor automatically
         course.setProfessorid(coursesService.getProfessorID());
+        // set project percentage automatically 
+        course.setProjectPR(course.getExamPR());
         // update the course in the repository
 		coursesService.updateCourse(course);
     	return "redirect:/courses";
@@ -57,6 +59,10 @@ public class CoursesController {
     public String getStudentsPage(Integer courseAttending, Model model) {
         // Set courseAttending automatically to use it for getting the students that attend a specific course
         studentService.setCourseAttending(courseAttending);
+        Double exam = coursesService.getOneCourse(courseAttending).get(0).getExamPR();
+        Double project = coursesService.getOneCourse(courseAttending).get(0).getProjectPR();
+        studentService.setExamGradePR(exam);
+        studentService.setProjectGradePR(project);
         // List of Students
     	List<Student> students = studentService.getByCourseAttending(courseAttending);
         // Model to use it in HTML with Thymeleaf

@@ -14,7 +14,6 @@ public class ClassWebBetaApplication {
 		try {
 			openHomePage();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

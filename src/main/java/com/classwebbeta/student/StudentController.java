@@ -25,6 +25,12 @@ public class StudentController {
       student.setYearOfStudies(student.getYearOfStudies());
       student.setSyllabus(student.getSyllabus());
       student.setSemester(student.getSemester());
+      Double finalExamGrade = student.getExamGrade()*studentService.getExamGradePR();
+      if (studentService.getProjectGradePR() != 0){
+        Double finalProjectGrade = student.getProjectGrade()*studentService.getProjectGradePR();
+        student.setProjectGrade(finalProjectGrade);
+      }
+      student.setExamGrade(finalExamGrade);
     	System.out.println("Added New Student: " + student.toString());
     	studentService.addStudent(student);
     	return "redirect:/courses/students/?courseAttending=" + studentService.getCourseAttending();
@@ -37,6 +43,10 @@ public class StudentController {
       student.setYearOfStudies(student.getYearOfStudies());
       student.setSyllabus(student.getSyllabus());
       student.setSemester(student.getSemester());
+      Double finalExamGrade = student.getExamGrade()*studentService.getExamGradePR();
+      Double finalProjectGrade = student.getProjectGrade()*studentService.getProjectGradePR();
+      student.setExamGrade(finalExamGrade);
+      student.setProjectGrade(finalProjectGrade);
 		  studentService.updateStudent(student);
     	return "redirect:/courses/students/?courseAttending=" + studentService.getCourseAttending();
     }

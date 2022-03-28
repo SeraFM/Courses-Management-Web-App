@@ -16,7 +16,9 @@ public class StudentService {
 	}
 
 	Integer courseAttending;
-
+	private Double examGradePR;
+    private Double projectGradePR;
+	
     public Integer getCourseAttending(){
         return courseAttending;
     }
@@ -24,6 +26,23 @@ public class StudentService {
     public void setCourseAttending(Integer courseAttending){
         this.courseAttending = courseAttending;
     }
+
+    public void setExamGradePR(Double examGradePR){
+        this.examGradePR = examGradePR;
+    }
+
+    public Double getExamGradePR(){
+        return examGradePR;
+    }
+
+    public void setProjectGradePR(Double projectGradePR){
+      this.projectGradePR = projectGradePR;
+    }
+
+    public Double getProjectGradePR(){
+        return projectGradePR;
+    }
+    
 	
 	// Get all students by the course they attend
 	public List<Student> getByCourseAttending(Integer courseAttending){
