@@ -52,9 +52,8 @@
 			      <th scope="col">Year</th>
 			      <th scope="col">Syllabus</th>
 			      <th scope="col">Semester</th>
-				  <th scope="col">Exam Percentage</th>
-				  <th scope="col">Project Percentage</th>
-			      <th scope="col">Attendance</th>
+				  <th scope="col">Exam</th>
+				  <th scope="col">Project</th>
 			      <th scope="col">Actions</th>
 			    </tr>
 			  </thead>
@@ -64,9 +63,8 @@
             		<td th:text="${course.year}"></td>
             		<td th:text="${course.syllabus}"></td>
             		<td th:text="${course.semester}"></td>
-					<td th:text="${course.examPR}"></td>
-					<td th:text="${course.projectPR}"></td>
-            		<td th:text="${course.attendance}"></td>
+					<td th:text="${course.examPR}+'%'"></td>
+					<td th:text="${course.projectPR}+'%'"></td>
             		<td>
             			<button data-bs-toggle="modal" th:attr="data-bs-target=${'#editModal' + course.courseid}" data-row="${course}" class="btn btn-sm btn-success"><img src="https://i.ibb.co/YcxKhdh/pencil-removebg-preview.png" width="30" /></button>
 
@@ -113,8 +111,6 @@
 						<label for="input" class="col-form-label">Exam Grade Percentage</label>
 			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="examPR">
 						   
-			       		<label for="input" class="col-form-label">Attendance</label>
-			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="attendance">
 			      </div>
 			       	
 			
@@ -184,11 +180,7 @@
 
 					<label for="examPR" class="col-form-label">Exam Grade Percentage</label>
                     <input style="background-color:#CDCDCD" type="text" class="form-control" id="examPR" name="examPR" th:attr="value=${course.examPR}" />
-
-                    <label for="attendance" class="col-form-label">Attendance</label>
-                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="attendance" name="attendance" th:attr="value=${course.attendance}" />
-                    
-                           
+                                       
               </div>
        
               <div class="modal-footer">

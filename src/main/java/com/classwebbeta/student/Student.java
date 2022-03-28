@@ -2,8 +2,6 @@ package com.classwebbeta.student;
 
 import java.time.LocalDate;
 import java.time.Year;
-import java.util.Objects;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -22,11 +20,20 @@ public class Student {
     private Integer yearOfStudies;
     private Integer syllabus;
     private Integer semester;
-    private Double projectGrade;
-    private Double examGrade;
     private Integer courseAttending;
-    
+	private String projectGrade;
+    private String examGrade;
+	private String finalGrade;
+
 	// Getters and Setters
+	
+	public String getFinalGrade() {
+		return finalGrade;
+	}
+	public void setFinalGrade(String finalGrade) {
+		this.finalGrade = finalGrade;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -94,25 +101,37 @@ public class Student {
 			this.semester = semester;
 		}
 	}
-	public Double getProjectGrade() {
+	public String getProjectGrade() {
 		return projectGrade;
 	}
-	public void setProjectGrade(Double projectGrade) {
+	public void setProjectGrade(String projectGrade) {
 		this.projectGrade = projectGrade;
 	}
-	public Double getExamGrade() {
+	public String getExamGrade() {
 		return examGrade;
 	}
-	public void setExamGrade(Double examGrade) {
+	public void setExamGrade(String examGrade) {
 		this.examGrade = examGrade;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(courseAttending, email, examGrade, fullname, projectGrade, semester, studentid, syllabus,
-				yearOfRegistration, yearOfStudies);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((courseAttending == null) ? 0 : courseAttending.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((examGrade == null) ? 0 : examGrade.hashCode());
+		result = prime * result + ((finalGrade == null) ? 0 : finalGrade.hashCode());
+		result = prime * result + ((fullname == null) ? 0 : fullname.hashCode());
+		result = prime * result + ((projectGrade == null) ? 0 : projectGrade.hashCode());
+		result = prime * result + ((semester == null) ? 0 : semester.hashCode());
+		result = prime * result + ((studentid == null) ? 0 : studentid.hashCode());
+		result = prime * result + ((syllabus == null) ? 0 : syllabus.hashCode());
+		result = prime * result + ((yearOfRegistration == null) ? 0 : yearOfRegistration.hashCode());
+		result = prime * result + ((yearOfStudies == null) ? 0 : yearOfStudies.hashCode());
+		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -122,19 +141,70 @@ public class Student {
 		if (getClass() != obj.getClass())
 			return false;
 		Student other = (Student) obj;
-		return Objects.equals(courseAttending, other.courseAttending) && Objects.equals(email, other.email)
-				&& Objects.equals(examGrade, other.examGrade) && Objects.equals(fullname, other.fullname)
-				&& Objects.equals(projectGrade, other.projectGrade) && Objects.equals(semester, other.semester)
-				&& Objects.equals(studentid, other.studentid) && Objects.equals(syllabus, other.syllabus)
-				&& Objects.equals(yearOfRegistration, other.yearOfRegistration)
-				&& Objects.equals(yearOfStudies, other.yearOfStudies);
+		if (courseAttending == null) {
+			if (other.courseAttending != null)
+				return false;
+		} else if (!courseAttending.equals(other.courseAttending))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (examGrade == null) {
+			if (other.examGrade != null)
+				return false;
+		} else if (!examGrade.equals(other.examGrade))
+			return false;
+		if (finalGrade == null) {
+			if (other.finalGrade != null)
+				return false;
+		} else if (!finalGrade.equals(other.finalGrade))
+			return false;
+		if (fullname == null) {
+			if (other.fullname != null)
+				return false;
+		} else if (!fullname.equals(other.fullname))
+			return false;
+		if (projectGrade == null) {
+			if (other.projectGrade != null)
+				return false;
+		} else if (!projectGrade.equals(other.projectGrade))
+			return false;
+		if (semester == null) {
+			if (other.semester != null)
+				return false;
+		} else if (!semester.equals(other.semester))
+			return false;
+		if (studentid == null) {
+			if (other.studentid != null)
+				return false;
+		} else if (!studentid.equals(other.studentid))
+			return false;
+		if (syllabus == null) {
+			if (other.syllabus != null)
+				return false;
+		} else if (!syllabus.equals(other.syllabus))
+			return false;
+		if (yearOfRegistration == null) {
+			if (other.yearOfRegistration != null)
+				return false;
+		} else if (!yearOfRegistration.equals(other.yearOfRegistration))
+			return false;
+		if (yearOfStudies == null) {
+			if (other.yearOfStudies != null)
+				return false;
+		} else if (!yearOfStudies.equals(other.yearOfStudies))
+			return false;
+		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Student [studentid=" + studentid + ", fullname=" + fullname + ", email=" + email
-				+ ", yearOfRegistration=" + yearOfRegistration + ", yearOfStudies=" + yearOfStudies + ", syllabus="
-				+ syllabus + ", semester=" + semester + ", projectGrade=" + projectGrade + ", examGrade=" + examGrade
-				+ ", courseAttending=" + courseAttending + "]";
+		return "Student [courseAttending=" + courseAttending + ", email=" + email + ", examGrade=" + examGrade
+				+ ", finalGrade=" + finalGrade + ", fullname=" + fullname + ", projectGrade=" + projectGrade
+				+ ", semester=" + semester + ", studentid=" + studentid + ", syllabus=" + syllabus
+				+ ", yearOfRegistration=" + yearOfRegistration + ", yearOfStudies=" + yearOfStudies + "]";
 	}
+	
 }

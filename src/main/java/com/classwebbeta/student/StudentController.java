@@ -25,12 +25,28 @@ public class StudentController {
       student.setYearOfStudies(student.getYearOfStudies());
       student.setSyllabus(student.getSyllabus());
       student.setSemester(student.getSemester());
-      Double finalExamGrade = student.getExamGrade()*studentService.getExamGradePR();
-      if (studentService.getProjectGradePR() != 0){
-        Double finalProjectGrade = student.getProjectGrade()*studentService.getProjectGradePR();
-        student.setProjectGrade(finalProjectGrade);
+      if (student.getExamGrade().equals("") && student.getProjectGrade().equals("")){
+          student.setExamGrade("-");
+          student.setProjectGrade("-");
+          student.setFinalGrade("-");
+      }else{
+        // If project percentage is > 0 then calculate it
+        if (studentService.getProjectGradePR() > 0){
+            Float projectGradeWithPercentage = Float.parseFloat(student.getProjectGrade())*(studentService.getProjectGradePR().floatValue()/100);
+            Float examGradeWithPercentage = Float.parseFloat(student.getExamGrade())*(studentService.getExamGradePR().floatValue()/100);
+            // If exam grade is < 5 the final grade = exam grade
+            if (Float.parseFloat(student.getExamGrade()) < 5){
+                student.setFinalGrade(student.getExamGrade());
+            }else{
+              Float finalGrade = examGradeWithPercentage + projectGradeWithPercentage;
+              student.setFinalGrade(String.valueOf(finalGrade));
+            }
+        }else{
+            student.setFinalGrade(student.getExamGrade());
+        }
+        student.setExamGrade(student.getExamGrade() + ".0");
+        student.setProjectGrade(student.getProjectGrade() + ".0");
       }
-      student.setExamGrade(finalExamGrade);
     	System.out.println("Added New Student: " + student.toString());
     	studentService.addStudent(student);
     	return "redirect:/courses/students/?courseAttending=" + studentService.getCourseAttending();
@@ -43,10 +59,28 @@ public class StudentController {
       student.setYearOfStudies(student.getYearOfStudies());
       student.setSyllabus(student.getSyllabus());
       student.setSemester(student.getSemester());
-      Double finalExamGrade = student.getExamGrade()*studentService.getExamGradePR();
-      Double finalProjectGrade = student.getProjectGrade()*studentService.getProjectGradePR();
-      student.setExamGrade(finalExamGrade);
-      student.setProjectGrade(finalProjectGrade);
+      if (student.getExamGrade().equals("") && student.getProjectGrade().equals("")){
+        student.setExamGrade("-");
+        student.setProjectGrade("-");
+        student.setFinalGrade("-");
+      }else{
+        // If project percentage is > 0 then calculate it
+        if (studentService.getProjectGradePR() > 0){
+            Float projectGradeWithPercentage = Float.parseFloat(student.getProjectGrade())*(studentService.getProjectGradePR().floatValue()/100);
+            Float examGradeWithPercentage = Float.parseFloat(student.getExamGrade())*(studentService.getExamGradePR().floatValue()/100);
+            // If exam grade is < 5 the final grade = exam grade
+            if (Float.parseFloat(student.getExamGrade()) < 5){
+                student.setFinalGrade(student.getExamGrade());
+            }else{
+              Float finalGrade = examGradeWithPercentage + projectGradeWithPercentage;
+              student.setFinalGrade(String.valueOf(finalGrade));
+            }
+        }else{
+          student.setFinalGrade(student.getExamGrade());
+        }
+        student.setExamGrade(student.getExamGrade() + ".0");
+        student.setProjectGrade(student.getProjectGrade() + ".0");
+      }
 		  studentService.updateStudent(student);
     	return "redirect:/courses/students/?courseAttending=" + studentService.getCourseAttending();
     }

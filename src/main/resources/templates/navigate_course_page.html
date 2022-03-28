@@ -56,6 +56,7 @@
 			      <th scope="col">Semester</th>
 			      <th scope="col">Project Grade</th>
 			      <th scope="col">Exam Grade</th>
+				  <th scope="col">Final Grade</th>
 			      <th scope="col">Actions</th>
 			    </tr>
 			  </thead>
@@ -69,6 +70,7 @@
             		<td th:text="${student.semester}"></td>
             		<td th:text="${student.projectGrade}"></td>
             		<td th:text="${student.examGrade}"></td>
+					<td th:text="${student.finalGrade}"></td>
             		<td>
             			<button data-bs-toggle="modal" th:attr="data-bs-target=${'#editModal' + student.studentid}" data-row="${student}" class="btn btn-sm btn-success"><img src="https://i.ibb.co/YcxKhdh/pencil-removebg-preview.png" width="20" /></button>
 
@@ -167,7 +169,7 @@
 				 
 				  
 					  <label for="studentid" class="col-form-label">AM</label>
-					  <input style="background-color:#CDCDCD" type="text" readonly="readonly" class="form-control" id="studentid" name="studentid" th:attr="value=${student.studentid}"/>
+					  <input style="background-color:#CDCDCD" type="text" class="form-control" id="studentid" name="studentid" th:attr="value=${student.studentid}"/>
 				  
 					  <label for="fullname" class="col-form-label">Full Name</label>
 					  <input style="background-color:#CDCDCD" type="text" class="form-control" id="fullname" name="fullname" th:attr="value=${student.fullname}" />      

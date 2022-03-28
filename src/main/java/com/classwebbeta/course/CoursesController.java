@@ -59,8 +59,8 @@ public class CoursesController {
     public String getStudentsPage(Integer courseAttending, Model model) {
         // Set courseAttending automatically to use it for getting the students that attend a specific course
         studentService.setCourseAttending(courseAttending);
-        Double exam = coursesService.getOneCourse(courseAttending).get(0).getExamPR();
-        Double project = coursesService.getOneCourse(courseAttending).get(0).getProjectPR();
+        Integer exam = coursesService.getOneCourse(courseAttending).get(0).getExamPR();
+        Integer project = coursesService.getOneCourse(courseAttending).get(0).getProjectPR();
         studentService.setExamGradePR(exam);
         studentService.setProjectGradePR(project);
         // List of Students

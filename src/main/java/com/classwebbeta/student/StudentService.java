@@ -16,8 +16,8 @@ public class StudentService {
 	}
 
 	Integer courseAttending;
-	private Double examGradePR;
-    private Double projectGradePR;
+	private Integer examGradePR;
+    private Integer projectGradePR;
 	
     public Integer getCourseAttending(){
         return courseAttending;
@@ -27,19 +27,19 @@ public class StudentService {
         this.courseAttending = courseAttending;
     }
 
-    public void setExamGradePR(Double examGradePR){
+    public void setExamGradePR(Integer examGradePR){
         this.examGradePR = examGradePR;
     }
 
-    public Double getExamGradePR(){
+    public Integer getExamGradePR(){
         return examGradePR;
     }
 
-    public void setProjectGradePR(Double projectGradePR){
+    public void setProjectGradePR(Integer projectGradePR){
       this.projectGradePR = projectGradePR;
     }
 
-    public Double getProjectGradePR(){
+    public Integer getProjectGradePR(){
         return projectGradePR;
     }
     
