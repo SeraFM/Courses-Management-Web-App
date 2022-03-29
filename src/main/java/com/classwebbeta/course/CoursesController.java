@@ -57,6 +57,19 @@ public class CoursesController {
     // Get Course's Students by courseAttending(Field in Student Table) using Thymeleaf. GetMapping is an HTTP Request to Get the URL of Students Here
     @GetMapping("/students")
     public String getStudentsPage(Integer courseAttending, Model model) {
+        
+        List<Double> statistics = studentService.getStatistics(courseAttending);
+        System.out.println("AVERAGE: " + statistics.get(0));
+        System.out.println("MEAN: " + statistics.get(1));
+        System.out.println("MIN: " + statistics.get(2));
+        System.out.println("MAX: " + statistics.get(3));
+        System.out.println("STANDARD DEVIATION: " + statistics.get(4));
+        System.out.println("VARIANCE: " + statistics.get(5));
+        System.out.println("SKEWNESS: " + statistics.get(6));
+        System.out.println("KURTOSIS: " + statistics.get(7));
+        System.out.println("MEDIAN: " + statistics.get(8));
+        System.out.println("SUCCESS RATE: " + statistics.get(9));
+
         // Set courseAttending automatically to use it for getting the students that attend a specific course
         studentService.setCourseAttending(courseAttending);
         Integer exam = coursesService.getOneCourse(courseAttending).get(0).getExamPR();

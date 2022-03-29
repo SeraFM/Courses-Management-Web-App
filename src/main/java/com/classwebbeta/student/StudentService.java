@@ -75,14 +75,16 @@ public class StudentService {
         List<Student> allStudents = studentRepository.findByCourseAttending(courseAttending);
 		List<Double> statistics = new ArrayList<Double>();
         for(int i=0; i<allStudents.size(); i++){
-			if (!allStudents.get(i).getFinalGrade().equals("-") || !allStudents.get(i).getFinalGrade().equals("")){
+			if (allStudents.get(i).getFinalGrade().equals("-") || allStudents.get(i).getFinalGrade().equals("")){
+
+            }else{
 				Double grade = Double.parseDouble(allStudents.get(i).getFinalGrade());
 				stats.addValue(grade);
 				count++;
 				if( grade >=5 ){
 					passed++;
 				}
-            }
+			}
         }
 		double sum = stats.getSum();
 		double mean = stats.getMean();
