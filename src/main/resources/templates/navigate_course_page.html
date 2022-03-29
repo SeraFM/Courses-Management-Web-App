@@ -42,9 +42,11 @@
 		<div>
 		<h1 class="display-4 text-uppercase" style="font-family: 'Verdana'; text-align: center">Students</h1>
         <hr class="style1 mb-5">
+
         <!-- Button to Open the Modal -->
 		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addStudentModal"><img src="https://i.ibb.co/j43pLX3/black-plus-icon-24.png" width="15" /> New Student</button>
-        
+		<button th:action="@{students/stats}" type="button" class="btn btn-success">STATISTICS</button>
+
 			<table style="background-color:#484444" class="table table-hover mt-5">
 			  <thead>
 			    <tr>

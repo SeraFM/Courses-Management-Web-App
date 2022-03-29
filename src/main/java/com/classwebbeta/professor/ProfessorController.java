@@ -45,7 +45,7 @@ public class ProfessorController {
     public String getAboutPage(Model model) {
         model.addAttribute("aboutNav");
         return "about_page";
-    }  
+    } 
     
     // Go to courses URL and diplsay all courses of the Instructor that loged in succesfully
     @GetMapping("/courses")
