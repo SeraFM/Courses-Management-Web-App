@@ -40,8 +40,8 @@ public class CoursesService {
 	}
 
 	// Delete Course
-	public void deleteCourse(Integer courseid) {
-		coursesRepository.deleteById(courseid);
+	public void deleteCourse(Course course) {
+		coursesRepository.delete(course);
 	}
 
 	// Get one Course

@@ -14,28 +14,46 @@
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-secondary bg-secondary">
-	  <div class="container-fluid">
-	    <a class="navbar-brand" href="/home">ClassWeb Beta</a>
-	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-	      <span class="navbar-toggler-icon"></span>
-	    </button>
-	
-	    <div class="collapse navbar-collapse" id="navbarColor02">
-	      <ul class="navbar-nav me-auto">
-	        <li class="nav-item">
-	          <a class="nav-link active" href="/home">Home
-	          </a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="/courses">Courses</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link" href="/about">About</a>
-	        </li>
-	      </ul>
-	    </div>
-	  </div>
-	</nav>
+		<div class="container-fluid">
+		  <a class="navbar-brand" href="/home">ClassWeb Beta</a>
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+	  
+		  <div class="collapse navbar-collapse" id="navbarColor02">
+			<ul class="navbar-nav me-auto">
+			  <li class="nav-item">
+				<a class="nav-link active" href="/home">Home
+				</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="/courses">Courses</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="/about">About</a>
+			  </li>
+			  
+				 <li class="nav-item dropdown">
+				  <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarMenu" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+					<img src="https://i.ibb.co/YbVqHvw/Untitled-design-8-removebg-preview.png" class="rounded-circle" height="25"/>
+				  </a>
+				  <ul class="dropdown-menu" aria-labelledby="navbarMenu">
+					<li>
+					  <a class="dropdown-item" href="#">My profile</a>
+					</li>
+					<li>
+					  <a class="dropdown-item" href="#">Settings</a>
+					</li>
+					<li>
+					  <a class="dropdown-item" href="#">Logout</a>
+					</li>
+				  </ul>
+				 </li>
+			  
+			</ul>
+		  </div>
+		</div>
+	  </nav>
 	
 	
 	<div class="container mt-5 mb-2">
@@ -127,7 +145,7 @@
 
 <!-- The Modal Delete-->
 <div th:each="course : ${courses}" th:attr="id=${'deleteModal' + course.courseid}" class="modal fade" tabindex="-1" role="dialog">
-  <form th:action="@{/courses/deleteCourse/(courseid=${course.courseid})}" th:method="delete">
+  <form th:action="@{/courses/deleteCourse/(courseid=${course.courseid})}" method="post">
   	<div class="modal-dialog" role="document">
     	<div class="modal-content" style="background-color:#383434">
 		     <div class="modal-header">
@@ -148,7 +166,7 @@
   </form>
 </div>
 
-
+<!-- The Modal Update-->
 <div th:each="course : ${courses}" th:attr="id=${'editModal' + course.courseid}" class="modal" role="dialog">
   <form th:action="@{/courses/updateCourse/(courseid=${course.courseid})}" method="post">
     <div class="modal-dialog">
@@ -191,6 +209,19 @@
         </div>
     </form>    
  </div>
+
+
+<!-- FOOTER -->
+<div class="container">
+	<div style="position: absolute; bottom: 25px;">
+		A better version of ClassWeb.
+	</div>	
+</div>
+<div class="container">
+<div style="position: absolute; bottom: 4px;">
+	Copyrights <img src="https://i.ibb.co/m0zgvVR/png-transparent-black-and-white-c-logo-tamil-nadu-copyright-symbol-600-040-copyright-angle-white-spi.png" width="18"/> 2022
+</div>
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

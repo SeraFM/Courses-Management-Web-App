@@ -1,13 +1,12 @@
 package com.classwebbeta.student;
 
-import java.util.ArrayList;
+import java.text.DecimalFormat;
 import java.util.List;
 
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-// StudentService is linked with the Repository to Add, Update, Delete etc. students from the database
+// StudentService is 'linked' with the Repository to Add, Update, Delete etc. students from the database
 @Service
 public class StudentService {
 
@@ -46,7 +45,6 @@ public class StudentService {
         return projectGradePR;
     }
     
-	
 	// Get all students by the course they attend
 	public List<Student> getByCourseAttending(Integer courseAttending){
 		return studentRepository.findByCourseAttending(courseAttending);
@@ -54,60 +52,61 @@ public class StudentService {
 
 	// Update Student
 	public void updateStudent(Student student) {
+		student.setCourseAttending(getCourseAttending());
+      	student.setYearOfStudies(student.getYearOfStudies());
+      	student.setSyllabus(student.getSyllabus());
+      	student.setSemester(student.getSemester());
 		studentRepository.save(student);
 	}
 	
 	// Add new Student
 	public void addStudent(Student student) {
+		student.setCourseAttending(getCourseAttending());
+      	student.setYearOfStudies(student.getYearOfStudies());
+      	student.setSyllabus(student.getSyllabus());
+      	student.setSemester(student.getSemester());
 		studentRepository.save(student);
 	}
 
 	// Delete Student
-	public void deleteStudent(Integer studentid){
-		studentRepository.deleteById(studentid);
+	public void deleteStudent(Student student){
+		studentRepository.delete(student);
 	}
-	
-	// Calculate the Grade Statistics of the Course
-	public List<Double> getStatistics(Integer courseAttending){
-		DescriptiveStatistics stats = new DescriptiveStatistics();
-        int count = 0;
-		int passed = 0;
-        List<Student> allStudents = studentRepository.findByCourseAttending(courseAttending);
-		List<Double> statistics = new ArrayList<Double>();
-        for(int i=0; i<allStudents.size(); i++){
-			if (allStudents.get(i).getFinalGrade().equals("-") || allStudents.get(i).getFinalGrade().equals("")){
 
-            }else{
-				Double grade = Double.parseDouble(allStudents.get(i).getFinalGrade());
-				stats.addValue(grade);
-				count++;
-				if( grade >=5 ){
-					passed++;
+	public void checkValidInputForAddStudent(Student student){
+		if ((student.getExamGrade().equals("") && student.getProjectGrade().equals("")) || (student.getExamGrade().equals("-") && student.getProjectGrade().equals("-")) ){
+			student.setExamGrade("-");
+			student.setProjectGrade("-");
+			student.setFinalGrade("-");
+		}else{
+		  // If project percentage is > 0 then calculate it
+		  if (getProjectGradePR() > 0){
+			  Double projectGradeWithPercentage = Double.parseDouble(student.getProjectGrade())*(getProjectGradePR().floatValue()/100);
+			  Double examGradeWithPercentage = Double.parseDouble(student.getExamGrade())*(getExamGradePR().floatValue()/100);
+			  // If exam grade is < 5 the final grade = exam grade
+			  if (Double.parseDouble(student.getExamGrade()) < 5){
+				  student.setFinalGrade(student.getExamGrade());
+			  }else{
+				Double finalGrade = examGradeWithPercentage + projectGradeWithPercentage;
+				String decimalPart[] = new String[15];
+				decimalPart = String.valueOf(finalGrade).split("");
+				if (Integer.parseInt(decimalPart[2]) > 5){
+					finalGrade = Double.parseDouble(decimalPart[0]) + 1;
+				}else if (Integer.parseInt(decimalPart[2]) < 5){
+					finalGrade = Double.parseDouble(decimalPart[0]);
+				}else{
+					finalGrade = Double.parseDouble(decimalPart[0]) + 0.5;
 				}
-			}
-        }
-		double sum = stats.getSum();
-		double mean = stats.getMean();
-		double min = stats.getMin();
-		double max = stats.getMax();
-		double standardDeviation = stats.getStandardDeviation();
-		double variance = stats.getVariance(); 
-		double skewness = stats.getSkewness();
-		double kurtosis = stats.getKurtosis();
-		double median = stats.getPercentile(50);
-        double average = sum/count;
-		double successRate = (passed/count)*100;
-		statistics.add(0, average);
-		statistics.add(1, mean);
-		statistics.add(2, min);
-		statistics.add(3, max);
-		statistics.add(4, standardDeviation);
-		statistics.add(5, variance);
-		statistics.add(6, skewness);
-		statistics.add(7, kurtosis);
-		statistics.add(8, median);
-		statistics.add(9, successRate);
-		return statistics;
+
+				DecimalFormat df = new DecimalFormat("#.##");
+				student.setFinalGrade(String.valueOf(df.format(finalGrade)).replace(",", "."));
+			  }
+		  }else{
+			  student.setFinalGrade(student.getExamGrade());
+		  }
+		  student.setExamGrade(student.getExamGrade());
+		  student.setProjectGrade(student.getProjectGrade());
+		}
 	}
  	
 }

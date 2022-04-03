@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Statistics</title>
+
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-secondary bg-secondary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/home">ClassWeb Beta</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="/home">Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/courses">Courses</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      
+      <div class="container mt-5 mb-2">
+  
+          <h1 class="display-4 text-uppercase" style="font-family: 'Verdana'; text-align: center">Statistics</h1>
+          <hr class="style1 mb-5">
+  
+          <!-- Button to Open the Modal -->
+          <a th:href="@{/statistics/refresh}" type="button" class="btn btn-success">Re-Calculate</a>
+              <table style="background-color:#484444" class="table table-hover mt-5">
+                <thead>
+                  <tr>
+                    <th scope="col">Average</th>
+                    <th scope="col">Mean</th>
+                    <th scope="col">Min</th>
+                    <th scope="col">Max</th>
+                    <th scope="col">Standard Deviation</th>
+                    <th scope="col">Variance</th>
+                    <th scope="col">Skewness</th>
+                    <th scope="col">Kurtosis</th>
+                    <th scope="col">Median</th>
+                    <th scope="col">Success Rate</th>
+                  </tr>
+                </thead>
+                     <tr th:each="stat : ${stats}">
+                      <td th:text="${stat.average}"></td>
+                      <td th:text="${stat.mean}"></td>
+                      <td th:text="${stat.min}"></td>
+                      <td th:text="${stat.max}"></td>
+                      <td th:text="${stat.standardDeviation}"></td>
+                      <td th:text="${stat.variance}"></td>
+                      <td th:text="${stat.skewness}"></td>
+                      <td th:text="${stat.kurtosis}"></td>
+                      <td th:text="${stat.median}"></td>
+                      <td th:text="${stat.successRate}"></td>
+                  </tr>
+          </table>
+      </div>
+
+<!-- FOOTER -->
+<div class="container">
+	<div style="position: absolute; bottom: 25px;">
+		A better version of ClassWeb.
+	</div>	
+</div>
+<div class="container">
+<div style="position: absolute; bottom: 4px;">
+	Copyrights <img src="https://i.ibb.co/m0zgvVR/png-transparent-black-and-white-c-logo-tamil-nadu-copyright-symbol-600-040-copyright-angle-white-spi.png" width="18"/> 2022
+</div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

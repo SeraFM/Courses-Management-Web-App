@@ -3,11 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+	<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
 <title>Students</title>
 
 </head>
@@ -32,6 +31,24 @@
 	        <li class="nav-item">
 	          <a class="nav-link" href="/about">About</a>
 	        </li>
+	        
+	       	<li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarMenu" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+		          <img src="https://i.ibb.co/YbVqHvw/Untitled-design-8-removebg-preview.png" class="rounded-circle" height="25"/>
+		        </a>
+		        <ul class="dropdown-menu" aria-labelledby="navbarMenu">
+		          <li>
+		            <a class="dropdown-item" href="#">My profile</a>
+		          </li>
+		          <li>
+		            <a class="dropdown-item" href="#">Settings</a>
+		          </li>
+		          <li>
+		            <a class="dropdown-item" href="#">Logout</a>
+		          </li>
+		        </ul>
+		   	</li>
+	        
 	      </ul>
 	    </div>
 	  </div>
@@ -39,11 +56,12 @@
 	
 	
 	<div class="container mt-5 mb-2">
-		<div>
+
 		<h1 class="display-4 text-uppercase" style="font-family: 'Verdana'; text-align: center">Students</h1>
         <hr class="style1 mb-5">
 
         <!-- Button to Open the Modal -->
+		<a th:href="@{/students/stats}" type="button" class="btn btn-danger">View Statistics</a>
 		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addStudentModal"><img src="https://i.ibb.co/j43pLX3/black-plus-icon-24.png" width="15" /> New Student</button>
 			<table style="background-color:#484444" class="table table-hover mt-5">
 			  <thead>
@@ -75,12 +93,11 @@
             		<td>
             			<button data-bs-toggle="modal" th:attr="data-bs-target=${'#editModal' + student.studentid}" data-row="${student}" class="btn btn-sm btn-success"><img src="https://i.ibb.co/YcxKhdh/pencil-removebg-preview.png" width="20" /></button>
 
-            			<button class="btn btn-sm btn-danger"><img src="https://freesvg.org/img/trash.png" width="20" /></button>
+            			<button data-bs-toggle="modal" th:attr="data-bs-target=${'#deleteModal' + student.studentid}" data-row="${student}" class="btn btn-sm btn-danger"><img src="https://freesvg.org/img/trash.png" width="20" /></button>
             			
             		</td>
         		</tr>
 		</table>
-		</div>
 	</div>
 
 
@@ -132,8 +149,9 @@
 
 
 <!-- The Modal Delete-->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
-  	<div class="modal-dialog" role="document">
+<div th:each="student : ${students}" th:attr="id=${'deleteModal' + student.studentid}" class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+	<form th:action="@{/students/deleteStudent/(studentid=${student.studentid})}" method="post">
+	<div class="modal-dialog" role="document">
     	<div class="modal-content" style="background-color:#383434">
 		     <div class="modal-header">
 		        <h5 class="modal-title"></h5>
@@ -148,11 +166,12 @@
 		     </div>
 		     <div class="modal-footer">
 				 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-		     	 <a href="" class="btn btn-danger" id="delRef">Yes, Delete</a>
+		     	 <button type="submit" class="btn btn-danger">Yes, Delete</button>
 		      </div>
 	
 	    </div>
 		</div>
+	</form> 
 </div>
 
 <!-- The Update Student Modal -->
@@ -196,6 +215,18 @@
 		    </div>
 		</div>
 	</form>    
+</div>
+
+<!-- FOOTER -->
+<div class="container">
+	<div style="position: absolute; bottom: 25px;">
+		A better version of ClassWeb.
+	</div>	
+</div>
+<div class="container">
+<div style="position: absolute; bottom: 4px;">
+	Copyrights <img src="https://i.ibb.co/m0zgvVR/png-transparent-black-and-white-c-logo-tamil-nadu-copyright-symbol-600-040-copyright-angle-white-spi.png" width="18"/> 2022
+</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
