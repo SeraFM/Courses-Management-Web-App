@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <title>Students</title>
 
 </head>
@@ -54,56 +55,91 @@
 	  </div>
 	</nav>
 	
-	
+
+
 	<div class="container mt-5 mb-2">
 
-		<h1 class="display-4 text-uppercase" style="font-family: 'Verdana'; text-align: center">Students</h1>
-        <hr class="style1 mb-5">
+		<h1 class="display-10 text-uppercase" style="font-family: 'Verdana'; text-align: center">Statistics</h1>
+		<hr class="style1 mb-5">
 
-        <!-- Button to Open the Modal -->
-		<a th:href="@{/students/stats}" type="button" class="btn btn-danger">View Statistics</a>
-		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addStudentModal"><img src="https://i.ibb.co/j43pLX3/black-plus-icon-24.png" width="15" /> New Student</button>
-			<table style="background-color:#484444" class="table table-hover mt-5">
-			  <thead>
-			    <tr>
-			      <th scope="col">AM</th>
-			      <th scope="col">Name</th>
-			      <th scope="col">Email</th>
-			      <th scope="col">Year of Registration</th>
-			      <th scope="col">Year of Studies</th>
-			      <th scope="col">Syllabus</th>
-			      <th scope="col">Semester</th>
-			      <th scope="col">Project Grade</th>
-			      <th scope="col">Exam Grade</th>
-				  <th scope="col">Final Grade</th>
-			      <th scope="col">Actions</th>
-			    </tr>
-			  </thead>
-			   	<tr th:each="student : ${students}">
-            		<td th:text="${student.studentid}"></td>
-            		<td th:text="${student.fullname}"></td>
-            		<td th:text="${student.email}"></td>
-            		<td th:text="${student.yearOfRegistration}"></td>
-            		<td th:text="${student.yearOfStudies}"></td>
-            		<td th:text="${student.syllabus}"></td>
-            		<td th:text="${student.semester}"></td>
-            		<td th:text="${student.projectGrade}"></td>
-            		<td th:text="${student.examGrade}"></td>
-					<td th:text="${student.finalGrade}"></td>
-            		<td>
-            			<button data-bs-toggle="modal" th:attr="data-bs-target=${'#editModal' + student.studentid}" data-row="${student}" class="btn btn-sm btn-success"><img src="https://i.ibb.co/YcxKhdh/pencil-removebg-preview.png" width="20" /></button>
-
-            			<button data-bs-toggle="modal" th:attr="data-bs-target=${'#deleteModal' + student.studentid}" data-row="${student}" class="btn btn-sm btn-danger"><img src="https://freesvg.org/img/trash.png" width="20" /></button>
-            			
-            		</td>
-        		</tr>
+		<!-- Button to Open the Modal -->
+			<table style="background-color:#484444" class="table table-hover mt-2">
+				<thead>
+				<tr>
+					<th scope="col">Min</th>
+					<th scope="col">Max</th>
+					<th scope="col">Mean</th>
+					<th scope="col">Standard Deviation</th>
+					<th scope="col">Variance</th>
+					<th scope="col">Percentiles</th>
+					<th scope="col">Skewness</th>
+					<th scope="col">Kurtosis</th>
+					<th scope="col">Median</th>
+					<th scope="col">Success Rate</th>
+				</tr>
+				</thead>
+					<tr th:each="stat : ${stats}">
+					<td th:text="${stat.min}"></td>
+					<td th:text="${stat.max}"></td>
+					<td th:text="${stat.mean}"></td>
+					<td th:text="${stat.standardDeviation}"></td>
+					<td th:text="${stat.variance}"></td>
+					<td th:text="${stat.percentiles}"></td>
+					<td th:text="${stat.skewness}"></td>
+					<td th:text="${stat.kurtosis}"></td>
+					<td th:text="${stat.median}"></td>
+					<td th:text="${stat.successRate}+'%'"></td>
+				</tr>
 		</table>
 	</div>
 
+	<div class="container mt-5 mb-2">
+
+		<h1 class="display-4 text-uppercase" style="font-family: 'Verdana'; text-align: center">Students</h1>
+		<hr class="style1 mb-5">
+
+		<!-- Button to Open the Modal -->
+		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addStudentModal"><img src="https://i.ibb.co/j43pLX3/black-plus-icon-24.png" width="15" /> New Student</button>
+			<table style="background-color:#484444" class="table table-hover mt-5">
+			<thead>
+				<tr>
+				<th scope="col">AM</th>
+				<th scope="col">Name</th>
+				<th scope="col">Email</th>
+				<th scope="col">Year of Registration</th>
+				<th scope="col">Year of Studies</th>
+				<th scope="col">Syllabus</th>
+				<th scope="col">Semester</th>
+				<th scope="col">Project Grade</th>
+				<th scope="col">Exam Grade</th>
+				<th scope="col">Final Grade</th>
+				<th scope="col">Actions</th>
+				</tr>
+			</thead>
+				<tr th:each="student : ${students}">
+					<td th:text="${student.studentid}"></td>
+					<td th:text="${student.fullname}"></td>
+					<td th:text="${student.email}"></td>
+					<td th:text="${student.yearOfRegistration}"></td>
+					<td th:text="${student.yearOfStudies}"></td>
+					<td th:text="${student.syllabus}"></td>
+					<td th:text="${student.semester}"></td>
+					<td th:text="${student.projectGrade}"></td>
+					<td th:text="${student.examGrade}"></td>
+					<td th:text="${student.finalGrade}"></td>
+					<td>
+						<button data-bs-toggle="modal" th:attr="data-bs-target=${'#editModal' + student.studentid}" data-row="${student}" class="btn btn-sm btn-success"><img src="https://i.ibb.co/YcxKhdh/pencil-removebg-preview.png" width="20" /></button>
+
+						<button data-bs-toggle="modal" th:attr="data-bs-target=${'#deleteModal' + student.studentid}" data-row="${student}" class="btn btn-sm btn-danger"><img src="https://freesvg.org/img/trash.png" width="20" /></button>
+						
+					</td>
+				</tr>
+		</table>
+	</div>
 
 <!-- The Add Student Modal -->
 <div class="modal" id="addStudentModal">
-	<form th:action="@{/students/addStudent}" method="post">
+	<form th:action="@{/students/addStudent}" method="post">	
 	  	<div class="modal-dialog">
 	    	<div class="modal-content" style="background-color:#383434">
 	
@@ -118,15 +154,15 @@
 			       	
 			       		<label for="input" class="col-form-label">AM</label>
 			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="studentid">
-			       	
+
 			       		<label for="input" class="col-form-label">Full Name</label>
-			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="fullname">  	
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="fullname" required>  	
 			       	
 			       		<label for="input" class="col-form-label">Email</label>
-			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="email">
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="email" required>
 			      
 			       		<label for="input" class="col-form-label">Year of Registration</label>
-			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="yearOfRegistration">
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="yearOfRegistration" required>
 				
 			       		<label for="input" class="col-form-label">Project Grade</label>
 			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="projectGrade">
@@ -189,16 +225,16 @@
 				 
 				  
 					  <label for="studentid" class="col-form-label">AM</label>
-					  <input style="background-color:#CDCDCD" type="text" class="form-control" id="studentid" name="studentid" th:attr="value=${student.studentid}"/>
+					  <input style="background-color:#CDCDCD" type="text" class="form-control" id="studentid" name="studentid" th:attr="value=${student.studentid}" required/>
 				  
 					  <label for="fullname" class="col-form-label">Full Name</label>
-					  <input style="background-color:#CDCDCD" type="text" class="form-control" id="fullname" name="fullname" th:attr="value=${student.fullname}" />      
+					  <input style="background-color:#CDCDCD" type="text" class="form-control" id="fullname" name="fullname" th:attr="value=${student.fullname}" required/>      
 				  
 					  <label for="email" class="col-form-label">Email</label>
-					  <input style="background-color:#CDCDCD" type="text" class="form-control" id="email" name="email" th:attr="value=${student.email}" />
+					  <input style="background-color:#CDCDCD" type="text" class="form-control" id="email" name="email" th:attr="value=${student.email}" required/>
 				
 					  <label for="yearOfRegistration" class="col-form-label">Year of Registration</label>
-					  <input style="background-color:#CDCDCD" type="text" class="form-control" id="yearOfRegistration" name="yearOfRegistration" th:attr="value=${student.yearOfRegistration}" />
+					  <input style="background-color:#CDCDCD" type="text" class="form-control" id="yearOfRegistration" name="yearOfRegistration" th:attr="value=${student.yearOfRegistration}" required/>
   
 					  <label for="projectGrade" class="col-form-label">Project Grade</label>
 					  <input style="background-color:#CDCDCD" type="text" class="form-control" id="projectGrade" name="projectGrade" th:attr="value=${student.projectGrade}" />
@@ -217,17 +253,6 @@
 	</form>    
 </div>
 
-<!-- FOOTER -->
-<div class="container">
-	<div style="position: absolute; bottom: 25px;">
-		A better version of ClassWeb.
-	</div>	
-</div>
-<div class="container">
-<div style="position: absolute; bottom: 4px;">
-	Copyrights <img src="https://i.ibb.co/m0zgvVR/png-transparent-black-and-white-c-logo-tamil-nadu-copyright-symbol-600-040-copyright-angle-white-spi.png" width="18"/> 2022
-</div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>

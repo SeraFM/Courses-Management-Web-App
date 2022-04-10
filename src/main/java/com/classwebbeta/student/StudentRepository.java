@@ -9,5 +9,9 @@ import org.springframework.stereotype.Repository;
 public interface StudentRepository extends JpaRepository<Student,Integer> {
 	
 	// Find students by the course they attend 
-	List<Student> findByCourseAttending(Integer courseAttending);	
+	List<Student> findByCourseAttending(Integer courseAttending);
+	List<Student> findByEmail(String email);
+	List<Student> findByStudentid(Integer studentid);
+	Boolean existsByEmail(String email);
+	List<Student> findByEmailAndPassword(String email, String password);	
 }

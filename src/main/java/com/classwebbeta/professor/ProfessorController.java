@@ -1,6 +1,6 @@
 package com.classwebbeta.professor;
 
-import java.util.List; 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.classwebbeta.course.Course;
 import com.classwebbeta.course.CoursesService;
+import com.classwebbeta.login.LoginService;
+import com.classwebbeta.student.Student;
+import com.classwebbeta.student.StudentService;
 
 
 @Controller
@@ -19,10 +22,13 @@ public class ProfessorController {
     private final ProfessorService professorService;
     @Autowired
 	private final CoursesService coursesService;
+    @Autowired
+    private final LoginService loginService;
 
-    public ProfessorController(ProfessorService professorService, CoursesService coursesService ){
+    public ProfessorController(ProfessorService professorService, CoursesService coursesService, LoginService loginService){
         this.professorService = professorService;
 		this.coursesService = coursesService;
+        this.loginService = loginService;
     }
     
     // Go to the Login URL with HTTP Request GetMapping
@@ -54,29 +60,34 @@ public class ProfessorController {
         model.addAttribute("courses", course);
         return "courses_page";
     }
+
+    @GetMapping("/registerCourse")
+    public String registerCourse(Model model) {
+        model.addAttribute("registerCourse");
+        return "student_course_registration";
+    }    
     
     // Get the login Email-Passowrd inputs from user and check if they are in the database so the user(instructor) can navigate to home page
     @PostMapping("/login")
-    public String login(@ModelAttribute Professor professorModel, Model model) {
-        // Print the login request from user
-        System.out.println("Login Request: " + "Email: " + professorModel.getEmail() + "  Password: ********");
+    public String login(@ModelAttribute Professor professorModel, StudentService studentService, Model model, Model modelStudent) {
+
         // Calling a method to check if the inputs are in the database
-        Professor authenticated = professorService.authenticate(professorModel.getEmail(), professorModel.getPassword());
-        if(authenticated!=null) {
-        	List<Professor> all = professorService.getAllProfessors();
-        	for(int i=0; i<all.size(); i++){
-                // if is true then navigate to home page
-        		if((all.get(i).getEmail()).equals(authenticated.getEmail())) {
-        			System.out.println("Loged in as: " + all.get(i).toString());
-        			coursesService.setProfessorID(all.get(i).getProfessorid());
-        			model.addAttribute("userLogin", authenticated.getEmail());
-                    return "home_page";
-        		}
-        	}
-        	System.out.println("Not Valid Username or Password. Please try again");
-        	return "redirect:/login";
+        Boolean checkLogin = loginService.LoginAsProfessorOrStudentCheck(professorModel.getEmail(), professorModel.getPassword());
+
+        if (checkLogin == false){
+            return "error_page";
+        }
+
+        if(loginService.isProfessor()) {
+            List<Professor> professor = professorService.getProfessor(loginService.getEmail());
+            coursesService.setProfessorID(professor.get(0).getProfessorid());
+            model.addAttribute("userLogin", professor.get(0).getProfessorName());
+            return "home_page";	
+        }else if(loginService.isStudent()){
+            List<Student> student = studentService.getByEmail(loginService.getEmail());
+            modelStudent.addAttribute("userLogin", student.get(0).getFullname());
+            return "student_page";
         }else{
-        	System.out.println("Not Valid Username or Password. Please try again");
             return "redirect:/login";
         }
     }

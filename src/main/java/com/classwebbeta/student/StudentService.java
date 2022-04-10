@@ -45,6 +45,23 @@ public class StudentService {
         return projectGradePR;
     }
     
+	public List<Student> getAllStudents(){
+		return studentRepository.findAll();
+	}
+
+	public List<Student> getStudent(Integer studentid){
+		return studentRepository.findByStudentid(studentid);
+	}
+
+	public List<Student> getByEmail(String email){
+		return studentRepository.findByEmail(email);
+	}
+
+	public List<Student> getByEmailAndPassword(String email, String password){
+		return studentRepository.findByEmailAndPassword(email, password);
+
+	}
+
 	// Get all students by the course they attend
 	public List<Student> getByCourseAttending(Integer courseAttending){
 		return studentRepository.findByCourseAttending(courseAttending);
@@ -68,12 +85,35 @@ public class StudentService {
 		studentRepository.save(student);
 	}
 
+	public void addRandomStudent(Student student){
+		studentRepository.save(student);
+	}
+
 	// Delete Student
 	public void deleteStudent(Student student){
 		studentRepository.delete(student);
 	}
 
-	public void checkValidInputForAddStudent(Student student){
+	public Boolean isValidStudentIdAndEmail(Student student){
+		Integer studentid = student.getStudentid();
+		String email = student.getEmail();
+
+		if (studentRepository.existsById(studentid)){
+			System.out.println("Error. StudentID already exists!");
+			return false;
+		}else{
+			if (studentRepository.existsByEmail(email)){
+				System.out.println("Error. Email already exists!");
+				return false;
+			}else{
+				//nothing
+				return true;
+			}
+		}
+		
+	}
+
+	public void isValidInputGrade(Student student){
 		if ((student.getExamGrade().equals("") && student.getProjectGrade().equals("")) || (student.getExamGrade().equals("-") && student.getProjectGrade().equals("-")) ){
 			student.setExamGrade("-");
 			student.setProjectGrade("-");
@@ -107,6 +147,7 @@ public class StudentService {
 		  student.setExamGrade(student.getExamGrade());
 		  student.setProjectGrade(student.getProjectGrade());
 		}
+		studentRepository.save(student);
 	}
  	
 }

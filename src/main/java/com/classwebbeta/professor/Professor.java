@@ -73,7 +73,7 @@ public class Professor {
 	}
 	@Override
 	public String toString() {
-		return "ProfessorModel [professorID=" + professorid + ", professorName=" + professorName + ", username="
+		return "ProfessorModel [professorid=" + professorid + ", professorName=" + professorName + ", username="
 				+ username + ", password=********" + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
 	}
     

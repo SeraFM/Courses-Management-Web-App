@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.classwebbeta.statistics.CalculateStatistics;
+import com.classwebbeta.statistics.Statistics;
 import com.classwebbeta.student.Student;
 import com.classwebbeta.student.StudentService;
 import java.util.List;
@@ -57,7 +59,7 @@ public class CoursesController {
     
     // Get Course's Students by courseAttending(Field in Student Table) using Thymeleaf. GetMapping is an HTTP Request to Get the URL of Students Here
     @GetMapping("/students")
-    public String getStudentsPage(Integer courseAttending, Model model) {
+    public String getStudentsPage(Integer courseAttending, Model model, Model model2, CalculateStatistics calStats) {
         // Set courseAttending automatically to use it for getting the students that attend a specific course
         studentService.setCourseAttending(courseAttending);
         Integer exam = coursesService.getOneCourse(courseAttending).get(0).getExamPR();
@@ -66,8 +68,17 @@ public class CoursesController {
         studentService.setProjectGradePR(project);
         // List of Students
     	List<Student> students = studentService.getByCourseAttending(courseAttending);
+
+        for (int i=0; i<students.size(); i++ ){
+            studentService.isValidInputGrade(students.get(i));
+        }
         // Model to use it in HTML with Thymeleaf
         model.addAttribute("students", students);
+
+        List<Statistics> stats = calStats.calculateStatistics(students);
+        model2.addAttribute("stats", stats);
+
+
         // Navigate to this HTML page (.html file)
         return "navigate_course_page";
     }
