@@ -13,59 +13,47 @@ public class LoginService {
     private boolean isProfessor = false;
     private String Email;
     private String Password;
-    
-
-    public String getEmail() {
-        return Email;
-    }
-
-
-    public void setEmail(String Email) {
-        this.Email = Email;
-    }
-
-
-    public String getPassword() {
-        return Password;
-    }
-
-
-    public void setPassword(String Password) {
-        this.Password = Password;
-    }
-
-
-    public boolean isStudent() {
-        return isStudent;
-    }
-
-
-    public void setStudent(boolean isStudent) {
-        this.isStudent = isStudent;
-    }
-
-
-    public boolean isProfessor() {
-        return isProfessor;
-    }
-
-
-    public void setProfessor(boolean isProfessor) {
-        this.isProfessor = isProfessor;
-    }
-
 
     @Autowired
 	private final ProfessorService professorService;
     private final StudentService studentService;
-
-  
 
     public LoginService(ProfessorService professorService, StudentService studentService) {
         this.professorService = professorService;
         this.studentService = studentService;
     }
 
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
+
+    public boolean isStudent() {
+        return isStudent;
+    }
+
+    public void setStudent(boolean isStudent) {
+        this.isStudent = isStudent;
+    }
+
+    public boolean isProfessor() {
+        return isProfessor;
+    }
+
+    public void setProfessor(boolean isProfessor) {
+        this.isProfessor = isProfessor;
+    }
 
     public Boolean LoginAsProfessorOrStudentCheck(String email, String password){
         if (professorService.authenticate(email, password).isEmpty() && studentService.getByEmailAndPassword(email, password).isEmpty()){

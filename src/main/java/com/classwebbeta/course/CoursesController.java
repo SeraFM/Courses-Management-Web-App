@@ -26,7 +26,7 @@ public class CoursesController {
 
     // Add Course using Thymeleaf. PostMapping is an HTTP Request to Add Course here. The value is the HTML url to follow
     @PostMapping("/addCourse")
-    public String addCourse(Course course) {
+    public String addCourse(Course course, Model model) {
         // Set course Professor automatically
     	course.setProfessorid(coursesService.getProfessorID());
         // set project percentage automatically 

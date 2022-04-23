@@ -21,7 +21,7 @@
 		 <div class="container py-5 h-100">
    			<div class="row d-flex justify-content-center align-items-center h-100">
      				<div class="col-12 col-md-8 col-lg-6 col-xl-5">
-       				<div class="card shadow-2-strong" style="border-radius: 1rem;">
+       					<div class="card shadow-2-strong" style="border-radius: 1rem;">
          					<div class="card-body p-5 text-center">
 							<form class="login100-form validate-form" method="post" action="/login" th:object="${loginRequest}">
 								<span class="login100-form-title">
@@ -49,6 +49,10 @@
 										Login
 									</button>
 									
+								</div>
+
+								<div class="text-center p-t-9">
+									<span th:if="${errorMessage}"  th:text="${errorMessage}" style="color:red"></span>
 								</div>
 			
 								<div class="text-center p-t-12">

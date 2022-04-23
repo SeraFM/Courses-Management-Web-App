@@ -7,11 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import com.classwebbeta.course.Course;
 import com.classwebbeta.course.CoursesService;
 import com.classwebbeta.login.LoginService;
-import com.classwebbeta.student.Student;
 import com.classwebbeta.student.StudentService;
 
 
@@ -75,7 +73,8 @@ public class ProfessorController {
         Boolean checkLogin = loginService.LoginAsProfessorOrStudentCheck(professorModel.getEmail(), professorModel.getPassword());
 
         if (checkLogin == false){
-            return "error_page";
+            model.addAttribute("errorMessage","Wrong Username or Password. Please try again");
+            return "login";
         }
 
         if(loginService.isProfessor()) {
@@ -83,10 +82,6 @@ public class ProfessorController {
             coursesService.setProfessorID(professor.get(0).getProfessorid());
             model.addAttribute("userLogin", professor.get(0).getProfessorName());
             return "home_page";	
-        }else if(loginService.isStudent()){
-            List<Student> student = studentService.getByEmail(loginService.getEmail());
-            modelStudent.addAttribute("userLogin", student.get(0).getFullname());
-            return "student_page";
         }else{
             return "redirect:/login";
         }
