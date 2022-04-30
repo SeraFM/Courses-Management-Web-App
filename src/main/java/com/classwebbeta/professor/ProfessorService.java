@@ -16,7 +16,7 @@ public class ProfessorService {
     }
 
     // Check if user login is valid (is in the database)  
-    public List<Professor> authenticate(String email, String password){
+    public Professor authenticate(String email, String password){
         return professorRepository.findByEmailAndPassword(email,password);
     }
     
@@ -25,7 +25,7 @@ public class ProfessorService {
     	return professorRepository.findAll();
     }
 
-    public List<Professor> getProfessor(String email) {
+    public Professor getProfessor(String email) {
     	return professorRepository.findByEmail(email);
     }
 

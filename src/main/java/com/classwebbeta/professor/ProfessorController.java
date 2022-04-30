@@ -4,14 +4,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.classwebbeta.course.Course;
 import com.classwebbeta.course.CoursesService;
-import com.classwebbeta.login.LoginService;
-import com.classwebbeta.student.StudentService;
-
 
 @Controller
 public class ProfessorController {
@@ -20,13 +18,10 @@ public class ProfessorController {
     private final ProfessorService professorService;
     @Autowired
 	private final CoursesService coursesService;
-    @Autowired
-    private final LoginService loginService;
-
-    public ProfessorController(ProfessorService professorService, CoursesService coursesService, LoginService loginService){
+    
+    public ProfessorController(ProfessorService professorService, CoursesService coursesService){
         this.professorService = professorService;
 		this.coursesService = coursesService;
-        this.loginService = loginService;
     }
     
     // Go to the Login URL with HTTP Request GetMapping
@@ -67,20 +62,20 @@ public class ProfessorController {
     
     // Get the login Email-Passowrd inputs from user and check if they are in the database so the user(instructor) can navigate to home page
     @PostMapping("/login")
-    public String login(@ModelAttribute Professor professorModel, StudentService studentService, Model model, Model modelStudent) {
+    public String login(@ModelAttribute Professor professorModel, Model model) {
 
         // Calling a method to check if the inputs are in the database
-        Boolean checkLogin = loginService.LoginAsProfessorOrStudentCheck(professorModel.getEmail(), professorModel.getPassword());
+        Professor loginProfessor = professorService.authenticate(professorModel.getEmail(), professorModel.getPassword());
 
-        if (checkLogin == false){
+        if (ObjectUtils.isEmpty(loginProfessor)){
             model.addAttribute("errorMessage","Wrong Username or Password. Please try again");
             return "login";
         }
 
-        if(loginService.isProfessor()) {
-            List<Professor> professor = professorService.getProfessor(loginService.getEmail());
-            coursesService.setProfessorID(professor.get(0).getProfessorid());
-            model.addAttribute("userLogin", professor.get(0).getProfessorName());
+        if(!ObjectUtils.isEmpty(loginProfessor)) {
+            Professor professor = professorService.getProfessor(loginProfessor.getEmail());
+            coursesService.setProfessorID(professor.getProfessorid());
+            model.addAttribute("userLogin", professor.getProfessorName());
             return "home_page";	
         }else{
             return "redirect:/login";

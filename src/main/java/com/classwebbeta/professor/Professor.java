@@ -16,7 +16,20 @@ public class Professor {
     private String password;
     private String email;
     private String phoneNumber;
-    
+
+	public Professor(Integer professorid, String professorName, String username, String password, String email,
+			String phoneNumber) {
+		this.professorid = professorid;
+		this.professorName = professorName;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+	}
+
+	public Professor(){}
+
+	
 	// Getters and Setters
 	public Integer getProfessorid() {
 		return professorid;
