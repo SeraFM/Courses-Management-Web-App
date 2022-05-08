@@ -15,6 +15,10 @@ public class ProfessorService {
         this.professorRepository = professorRepository;
     }
 
+    public void saveProfessor(Professor professor){
+        professorRepository.save(professor);
+    }
+
     // Check if user login is valid (is in the database)  
     public Professor authenticate(String email, String password){
         return professorRepository.findByEmailAndPassword(email,password);

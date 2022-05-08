@@ -85,10 +85,6 @@ public class StudentService {
 		studentRepository.save(student);
 	}
 
-	public void addRandomStudent(Student student){
-		studentRepository.save(student);
-	}
-
 	// Delete Student
 	public void deleteStudent(Student student){
 		studentRepository.delete(student);

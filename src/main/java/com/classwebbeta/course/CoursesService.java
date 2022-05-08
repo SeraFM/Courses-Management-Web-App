@@ -45,7 +45,7 @@ public class CoursesService {
 	}
 
 	// Get one Course
-	public List<Course> getOneCourse(Integer courseid){
+	public Course getOneCourse(Integer courseid){
 		return coursesRepository.findByCourseid(courseid);
 	}
 

@@ -62,8 +62,8 @@ public class CoursesController {
     public String getStudentsPage(Integer courseAttending, Model model, Model model2, CalculateStatistics calStats) {
         // Set courseAttending automatically to use it for getting the students that attend a specific course
         studentService.setCourseAttending(courseAttending);
-        Integer exam = coursesService.getOneCourse(courseAttending).get(0).getExamPR();
-        Integer project = coursesService.getOneCourse(courseAttending).get(0).getProjectPR();
+        Integer exam = coursesService.getOneCourse(courseAttending).getExamPR();
+        Integer project = coursesService.getOneCourse(courseAttending).getProjectPR();
         studentService.setExamGradePR(exam);
         studentService.setProjectGradePR(project);
         // List of Students
