@@ -94,46 +94,6 @@ public class StudentServiceTest {
     }
 
     @Test
-    void testGetByEmail() {
-        Student st = new Student();
-        st.setCourseAttending(1);
-        st.setEmail("email");
-        st.setExamGrade("10");
-        st.setFinalGrade("10");
-        st.setFullname("fullname");
-        st.setPassword("password");
-        st.setProjectGrade("10");
-        st.setYearOfRegistration(2020);
-        st.setYearOfStudies(2);
-        st.setSyllabus(1);
-        st.setSemester(1);
-        st.setStudentid(1);
-        studentService.addStudent(st);
-
-        assertEquals(st, studentService.getByEmail(st.getEmail()).get(0));
-    }
-
-    @Test
-    void testGetByEmailAndPassword() {
-        Student st = new Student();
-        st.setCourseAttending(1);
-        st.setEmail("email");
-        st.setExamGrade("10");
-        st.setFinalGrade("10");
-        st.setFullname("fullname");
-        st.setPassword("password");
-        st.setProjectGrade("10");
-        st.setYearOfRegistration(2020);
-        st.setYearOfStudies(2);
-        st.setSyllabus(1);
-        st.setSemester(1);
-        st.setStudentid(1);
-        studentService.addStudent(st);
-
-        assertEquals(st, studentService.getByEmailAndPassword(st.getEmail(), st.getPassword()).get(0));
-    }
-
-    @Test
     void testGetStudent() {
         Student st = new Student();
         st.setCourseAttending(1);

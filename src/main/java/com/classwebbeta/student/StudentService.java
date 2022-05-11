@@ -53,15 +53,6 @@ public class StudentService {
 		return studentRepository.findByStudentid(studentid);
 	}
 
-	public List<Student> getByEmail(String email){
-		return studentRepository.findByEmail(email);
-	}
-
-	public List<Student> getByEmailAndPassword(String email, String password){
-		return studentRepository.findByEmailAndPassword(email, password);
-
-	}
-
 	// Get all students by the course they attend
 	public List<Student> getByCourseAttending(Integer courseAttending){
 		return studentRepository.findByCourseAttending(courseAttending);
