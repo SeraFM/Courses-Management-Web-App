@@ -2,12 +2,8 @@ package com.classwebbeta.student;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import com.classwebbeta.ClassWebBetaApplication;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -33,7 +33,7 @@ public class ProfessorServiceTest {
         professor.setUsername("username");
         professorService.saveProfessor(professor);
         
-        assertEquals(professor, professorService.authenticate(professor.getEmail(), professor.getPassword()));
+        assertEquals(professor, professorService.authenticate(professor.getUsername(), professor.getPassword()));
 
     }
 

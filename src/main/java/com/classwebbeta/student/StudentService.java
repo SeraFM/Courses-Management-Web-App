@@ -81,25 +81,29 @@ public class StudentService {
 		studentRepository.delete(student);
 	}
 
-	public Boolean isValidStudentIdAndEmail(Student student){
+	// Check if student already exists
+	public Boolean studentAlreadyExists(Student student){
 		Integer studentid = student.getStudentid();
 		String email = student.getEmail();
 
-		if (studentRepository.existsById(studentid)){
-			System.out.println("Error. StudentID already exists!");
-			return false;
-		}else{
-			if (studentRepository.existsByEmail(email)){
-				System.out.println("Error. Email already exists!");
-				return false;
-			}else{
-				//nothing
+		if (studentRepository.existsById(studentid)) {
+			if (studentRepository.findByStudentid(studentid).getCourseAttending() == getCourseAttending()) {
+				System.out.println("Error. StudentID already exists!");
 				return true;
 			}
 		}
-		
+
+		if (studentRepository.existsByEmail(email)){
+			if(studentRepository.findByStudentid(studentid).getCourseAttending() == getCourseAttending()) {
+				System.out.println("Error. Email already exists!");
+				return true;
+			}
+		}
+
+		return false;
 	}
 
+	// Check for valid grade inputs
 	public void isValidInputGrade(Student student){
 		if ((student.getExamGrade().equals("") && student.getProjectGrade().equals("")) || (student.getExamGrade().equals("-") && student.getProjectGrade().equals("-")) ){
 			student.setExamGrade("-");

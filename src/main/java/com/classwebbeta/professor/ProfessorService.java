@@ -20,8 +20,8 @@ public class ProfessorService {
     }
 
     // Check if user login is valid (is in the database)  
-    public Professor authenticate(String email, String password){
-        return professorRepository.findByEmailAndPassword(email,password);
+    public Professor authenticate(String username, String password){
+        return professorRepository.findByUsernameAndPassword(username,password);
     }
     
     // Get all professors from the repository
@@ -29,8 +29,8 @@ public class ProfessorService {
     	return professorRepository.findAll();
     }
 
-    public Professor getProfessor(String email) {
-    	return professorRepository.findByEmail(email);
+    public Professor getProfessor(String username) {
+    	return professorRepository.findByUsername(username);
     }
 
 	

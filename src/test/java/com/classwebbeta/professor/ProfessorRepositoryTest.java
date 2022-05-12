@@ -20,7 +20,7 @@ public class ProfessorRepositoryTest {
     ProfessorRepository professorRepository;
 
     @Test
-    void testFindByEmail() {
+    void testFindByUsername() {
         Professor professor = new Professor();
         professor.setEmail("email@gmail.com");
         professor.setPassword("password");
@@ -30,11 +30,11 @@ public class ProfessorRepositoryTest {
         professor.setUsername("username");
         professorRepository.save(professor);
 
-        Assert.assertEquals(professor, professorRepository.findByEmail(professor.getEmail()));
+        Assert.assertEquals(professor, professorRepository.findByUsername(professor.getUsername()));
     }
 
     @Test
-    void testFindByEmailAndPassword() {
+    void testFindByUsernameAndPassword() {
         Professor professor = new Professor();
         professor.setEmail("email@gmail.com");
         professor.setPassword("password");
@@ -44,6 +44,6 @@ public class ProfessorRepositoryTest {
         professor.setUsername("username");
         professorRepository.save(professor);
 
-        Assert.assertEquals(professor, professorRepository.findByEmailAndPassword(professor.getEmail(), professor.getPassword()));
+        Assert.assertEquals(professor, professorRepository.findByUsernameAndPassword(professor.getUsername(), professor.getPassword()));
     }
 }

@@ -49,7 +49,7 @@
 		<div>
 		<h1 class="display-4 text-uppercase" style="font-family: 'Verdana'; text-align: center">Courses</h1>
         <hr class="style1 mb-5">
-		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal"><img src="https://i.ibb.co/j43pLX3/black-plus-icon-24.png" width="15" /> New Course</button>
+		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal"><img src="https://i.ibb.co/j43pLX3/black-plus-icon-24.png" width="15" /> Add Course</button>
 			<table class="table table-hover table-bordered mt-5" style="background-color:#484444">
 			  <thead>
 			    <tr>
@@ -82,11 +82,11 @@
 		</table>
 		</div>
 	</div>
-	
 
-<!-- The Modal -->
+
+<!-- The Add Course Modal -->
 <div class="modal" id="myModal">
-	<form th:action="@{/courses/addCourse}" method="POST">
+	<form th:action="@{/courses/addCourse}"  method="POST">
 	  	<div class="modal-dialog">
 	    	<div class="modal-content" style="background-color:#383434">
 	
@@ -99,23 +99,23 @@
 			      <!-- Modal body -->
 			      <div class="modal-body" style="background-color:#383434">
 			       	
-			       		<label for="input" class="col-form-label">ID</label>
-			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="courseid">
-			       	
-			       		<label for="input" class="col-form-label">Name</label>
-			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="name">  	
-			       	
-			       		<label for="input" class="col-form-label">Year</label>
-			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="year">
-			      
-			       		<label for="input" class="col-form-label">Syllabus</label>
-			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="syllabus">
+			       		<label for="input1" class="col-form-label">ID</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input1" name="courseid">
 
-			       		<label for="input" class="col-form-label">Semester</label>
-			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="semester">
+					  	<label for="input2" class="col-form-label">Name</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input2" name="name">
+			       	
+			       		<label for="input3" class="col-form-label">Year</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input3" name="year">
+			      
+			       		<label for="input4" class="col-form-label">Syllabus</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input4" name="syllabus">
+
+			       		<label for="input5" class="col-form-label">Semester</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input5" name="semester">
 		       	
-						<label for="input" class="col-form-label">Exam Grade Percentage</label>
-			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input" name="examPR">
+						<label for="input6" class="col-form-label">Exam Grade Percentage</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input6" name="examPR">
 						   
 			      </div>
 			       	

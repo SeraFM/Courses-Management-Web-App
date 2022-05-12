@@ -33,7 +33,7 @@ public class ProfessorController {
     // Go to the Login URL with HTTP Request GetMapping
 	@GetMapping("/login")
     public String getLoginPage(Model model){
-        // Add to the Model the Email and Password from the user trying to login
+        // Add to the Model the Username and Password from the user trying to login
         model.addAttribute("loginRequest", new Professor());
         return "login";
     }
@@ -65,13 +65,13 @@ public class ProfessorController {
     public String login(@ModelAttribute Professor professorModel, Model model){
 
         // Calling a method from Professor Service to check if the inputs are in the database
-        Professor loginProfessor = professorService.authenticate(professorModel.getEmail(), professorModel.getPassword());
+        Professor loginProfessor = professorService.authenticate(professorModel.getUsername(), professorModel.getPassword());
 
         if (ObjectUtils.isEmpty(loginProfessor)){
             model.addAttribute("errorMessage","Wrong Username or Password. Please try again");
             return "login";
         }else{
-            Professor professor = professorService.getProfessor(loginProfessor.getEmail());
+            Professor professor = professorService.getProfessor(loginProfessor.getUsername());
             coursesService.setProfessorID(professor.getProfessorid());
             model.addAttribute("userLogin", professor.getProfessorName());
             return "home_page";

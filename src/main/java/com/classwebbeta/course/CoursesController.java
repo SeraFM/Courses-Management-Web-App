@@ -3,6 +3,7 @@ package com.classwebbeta.course;
 import org.springframework.beans.factory.annotation.Autowired;   
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import com.classwebbeta.statistics.CalculateStatistics;
@@ -26,15 +27,21 @@ public class CoursesController {
 
     // Add Course using Thymeleaf. PostMapping is an HTTP Request to Add Course here. The value is the HTML url to follow
     @PostMapping("/addCourse")
-    public String addCourse(Course course, Model model) {
-        // Set course Professor automatically
-    	course.setProfessorid(coursesService.getProfessorID());
-        // set project percentage automatically 
-        course.setProjectPR(course.getExamPR());
-    	System.out.println("Added New Course: " + course.toString());
-        // add the course to the repository
-    	coursesService.addCourse(course);
-    	return "redirect:/courses";
+    public String addCourse(Course course, Model error) {
+        // check if the course with this ID already exists in database
+        if (ObjectUtils.isEmpty(coursesService.getOneCourse(course.getCourseid()))){
+            // Set course Professor automatically
+            course.setProfessorid(coursesService.getProfessorID());
+            // set project percentage automatically
+            course.setProjectPR(course.getExamPR());
+            System.out.println("Added New Course: " + course.toString());
+            // add the course to the repository
+            coursesService.addCourse(course);
+            return "redirect:/courses";
+        }else{
+            error.addAttribute("ErrorMessage", "Course with ID:"+ course.getCourseid() +" already exists with name: " + coursesService.getOneCourse(course.getCourseid()).getName());
+            return "error_page";
+        }
     }
     
     // Update existing Course using Thymeleaf. The value is the HTML url to follow

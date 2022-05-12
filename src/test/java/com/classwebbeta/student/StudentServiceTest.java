@@ -146,7 +146,7 @@ public class StudentServiceTest {
         st.setStudentid(1);
         studentService.addStudent(st);
 
-        assertEquals(false, studentService.isValidStudentIdAndEmail(st));
+        assertEquals(true, studentService.studentAlreadyExists(st));
     }
 
     @Test
