@@ -34,22 +34,22 @@ public class CoursesRepositoryTest {
         courseTest.setYear(2020);
         coursesRepository.save(courseTest);
 
-        assertEquals(courseTest, coursesRepository.findByCourseid(courseTest.getCourseid()));
+        assertEquals("Course", coursesRepository.findByCourseid(1).getName());
     }
 
     @Test
     void testFindByProfessorid() {
         Course courseTest = new Course();
-        courseTest.setCourseid(1);
+        courseTest.setCourseid(1145);
         courseTest.setExamPR(80);
         courseTest.setName("Course");
-        courseTest.setProfessorid(1);
+        courseTest.setProfessorid(112);
         courseTest.setProjectPR(80);
         courseTest.setSemester(1);
         courseTest.setSyllabus(1);
         courseTest.setYear(2020);
         coursesRepository.save(courseTest);
 
-        assertEquals(courseTest, coursesRepository.findByCourseid(courseTest.getProfessorid()));
+        assertEquals("Course", coursesRepository.findByProfessorid(112).get(0).getName());
     }
 }

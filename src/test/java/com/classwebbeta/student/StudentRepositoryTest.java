@@ -2,6 +2,12 @@ package com.classwebbeta.student;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.classwebbeta.ClassWebBetaApplication;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +48,7 @@ public class StudentRepositoryTest {
     @Test
     void testFindByCourseAttending() {
         Student st = new Student();
-        st.setCourseAttending(1);
+        st.setCourseAttending(1986);
         st.setEmail("email");
         st.setExamGrade("10");
         st.setFinalGrade("10");
@@ -53,10 +59,12 @@ public class StudentRepositoryTest {
         st.setYearOfStudies(2);
         st.setSyllabus(1);
         st.setSemester(1);
-        st.setStudentid(1);
+        st.setStudentid(11234);
         studentRepository.save(st);
+        assertNotNull(st);
 
-        assertEquals(st, studentRepository.findByCourseAttending(st.getCourseAttending()).get(0));
+        List<Student> test = studentRepository.findByCourseAttending(1986);
+        assertEquals("fullname", test.get(0).getFullname());
     }
 
     @Test
@@ -75,7 +83,9 @@ public class StudentRepositoryTest {
         st.setSemester(1);
         st.setStudentid(1);
         studentRepository.save(st);
+        assertNotNull(st);
 
-        assertEquals(st, studentRepository.findByStudentid(st.getStudentid()).get(0));
+        Student test = studentRepository.findByStudentid(1);
+        assertEquals("fullname", test.getFullname());
     }
 }

@@ -10,6 +10,6 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
 	
 	// Find students by the course they attend 
 	List<Student> findByCourseAttending(Integer courseAttending);
-	List<Student> findByStudentid(Integer studentid);
+	Student findByStudentid(Integer studentid);
 	Boolean existsByEmail(String email);
 }

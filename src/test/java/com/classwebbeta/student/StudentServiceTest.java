@@ -2,7 +2,7 @@ package com.classwebbeta.student;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import java.util.List;
 import com.classwebbeta.ClassWebBetaApplication;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ public class StudentServiceTest {
     @Test
     void testAddStudent() {
         Student st = new Student();
-        st.setCourseAttending(1);
+        st.setCourseAttending(121);
         st.setEmail("email");
         st.setExamGrade("10");
         st.setFinalGrade("10");
@@ -38,7 +38,10 @@ public class StudentServiceTest {
         st.setStudentid(1);
         studentService.addStudent(st);
 
-        assertEquals(st, studentService.getStudent(1).get(0));
+        assertNotNull(st);
+
+        Student test = studentService.getStudent(1);
+        assertEquals("fullname", test.getFullname());
     }
 
     @Test
@@ -60,13 +63,11 @@ public class StudentServiceTest {
 
         studentService.deleteStudent(st);
 
-        assertEquals(null, studentService.getStudent(1).get(0));
+        assertEquals(null, studentService.getStudent(1));
     }
 
     @Test
     void testGetAllStudents() {
-        int len = studentService.getAllStudents().size()+1;
-
         Student st = new Student();
         st.setCourseAttending(1);
         st.setEmail("email");
@@ -82,15 +83,30 @@ public class StudentServiceTest {
         st.setStudentid(1);
         studentService.addStudent(st);
 
-        assertEquals(len, studentService.getAllStudents().size());
+        assertEquals(1, studentService.getAllStudents().size());
     }
 
     @Test
     void testGetByCourseAttending() {
-        List<Student> all = studentService.getAllStudents();
-        List<Student> allByCourse = studentService.getByCourseAttending(1);
+        Student st = new Student();
+        st.setEmail("email");
+        st.setExamGrade("10");
+        st.setFinalGrade("10");
+        st.setFullname("fullname");
+        st.setPassword("password");
+        st.setProjectGrade("10");
+        st.setYearOfRegistration(2020);
+        st.setYearOfStudies(2);
+        st.setSyllabus(1);
+        st.setSemester(1);
+        st.setStudentid(1);
+        st.setCourseAttending(1231);
+        studentService.addStudent(st);
 
-        assertNotEquals(all, allByCourse);
+        List<Student> allByCourse = studentService.getByCourseAttending(null);
+        assertNotNull(allByCourse);
+
+        assertEquals("password",allByCourse.get(0).getPassword());
     }
 
     @Test
@@ -110,27 +126,7 @@ public class StudentServiceTest {
         st.setStudentid(1);
         studentService.addStudent(st);
 
-        assertEquals(st, studentService.getStudent(1).get(0));
-    }
-
-    @Test
-    void testIsValidInputGrade() {
-        Student st = new Student();
-        st.setCourseAttending(1);
-        st.setEmail("email");
-        st.setExamGrade("10");
-        st.setFinalGrade("10");
-        st.setFullname("fullname");
-        st.setPassword("password");
-        st.setProjectGrade("10");
-        st.setYearOfRegistration(2020);
-        st.setYearOfStudies(2);
-        st.setSyllabus(1);
-        st.setSemester(1);
-        st.setStudentid(1);
-        studentService.addStudent(st);
-
-        studentService.isValidInputGrade(st);
+        assertEquals("email", studentService.getStudent(1).getEmail());
     }
 
     @Test
@@ -150,7 +146,7 @@ public class StudentServiceTest {
         st.setStudentid(1);
         studentService.addStudent(st);
 
-        assertEquals(true, studentService.isValidStudentIdAndEmail(st));
+        assertEquals(false, studentService.isValidStudentIdAndEmail(st));
     }
 
     @Test
@@ -185,6 +181,6 @@ public class StudentServiceTest {
         updateSt.setStudentid(1);
         studentService.updateStudent(updateSt);
 
-        assertEquals(updateSt.getEmail(), studentService.getStudent(1).get(0).getEmail());
+        assertEquals(updateSt.getEmail(), studentService.getStudent(1).getEmail());
     }
 }

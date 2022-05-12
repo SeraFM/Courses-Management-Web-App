@@ -49,7 +49,7 @@ public class StudentService {
 		return studentRepository.findAll();
 	}
 
-	public List<Student> getStudent(Integer studentid){
+	public Student getStudent(Integer studentid){
 		return studentRepository.findByStudentid(studentid);
 	}
 

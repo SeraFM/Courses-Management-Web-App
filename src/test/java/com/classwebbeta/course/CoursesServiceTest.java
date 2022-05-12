@@ -38,7 +38,7 @@ public class CoursesServiceTest {
 
         coursesService.addCourse(courseTest);
 
-        assertEquals(courseTest, coursesService.getOneCourse(courseTest.getCourseid()));
+        assertEquals("Course", coursesService.getOneCourse(1).getName());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class CoursesServiceTest {
         courseTest.setCourseid(1);
         courseTest.setExamPR(80);
         courseTest.setName("Course");
-        courseTest.setProfessorid(1);
+        courseTest.setProfessorid(21);
         courseTest.setProjectPR(80);
         courseTest.setSemester(1);
         courseTest.setSyllabus(1);
@@ -76,7 +76,7 @@ public class CoursesServiceTest {
         courseTest2.setCourseid(2);
         courseTest2.setExamPR(80);
         courseTest2.setName("Course2");
-        courseTest2.setProfessorid(1);
+        courseTest2.setProfessorid(21);
         courseTest2.setProjectPR(80);
         courseTest2.setSemester(1);
         courseTest2.setSyllabus(1);
@@ -87,7 +87,7 @@ public class CoursesServiceTest {
         list.add(courseTest);
         list.add(courseTest2);
 
-        assertEquals(list, coursesService.getAllCourses(1));
+        assertEquals(list.size(), coursesService.getAllCourses(21).size());
 
     }
 
@@ -105,7 +105,7 @@ public class CoursesServiceTest {
 
         coursesService.addCourse(courseTest);
 
-        assertEquals(courseTest, coursesService.getOneCourse(courseTest.getCourseid()));
+        assertEquals("Course", coursesService.getOneCourse(1).getName());
     }
 
     @Test
