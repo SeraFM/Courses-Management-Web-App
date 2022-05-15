@@ -15,14 +15,13 @@ public class Course {
     private Integer year;
     private Integer syllabus;
     private Integer semester;
-   // private Integer attendance;
     private Integer professorid;
     private Integer examPR;
     private Integer projectPR;
 
     // Getters and Setters
 
-	@Override
+	/*@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -35,9 +34,9 @@ public class Course {
         result = prime * result + ((syllabus == null) ? 0 : syllabus.hashCode());
         result = prime * result + ((year == null) ? 0 : year.hashCode());
         return result;
-    }
+    }*/
 
-    @Override
+   /* @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
@@ -87,7 +86,7 @@ public class Course {
         } else if (!year.equals(other.year))
             return false;
         return true;
-    }
+    }*/
 
     public Integer getProfessorid() {
 		return professorid;
@@ -136,14 +135,6 @@ public class Course {
     public void setSemester(Integer semester) {
         this.semester = semester;
     }
-
-   /* public Integer getAttendance() {
-        return attendance;
-    }
-
-    public void setAttendance(Integer attendance) {
-        this.attendance = attendance;
-    }*/
     
     public Integer getExamPR() {
 		return examPR;

@@ -88,7 +88,6 @@ public class CoursesController {
         List<Statistics> stats = calStats.calculateStatistics(students);
         model2.addAttribute("stats", stats);
 
-
         // Navigate to this HTML page (.html file)
         return "navigate_course_page";
     }

@@ -4,16 +4,12 @@
 	<meta charset="UTF-8">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="src/main/resources/static/css/style.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <title>Students</title>
 
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-secondary bg-secondary">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
 		  <a class="navbar-brand" href="/home">ClassWeb Beta</a>
 		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,11 +44,10 @@
 
 	<div class="container mt-5 mb-2">
 
-		<h1 class="display-10 text-uppercase" style="font-family: 'Verdana'; text-align: center">Statistics</h1>
+		<h1 class="display-20 text-uppercase" style="font-family: 'Verdana'; text-align: center">Statistics</h1>
 		<hr class="style1 mb-5">
 
-		<!-- Button to Open the Modal -->
-			<table style="background-color:#484444" class="table table-hover mt-2">
+			<table class="table table-sm table-hover mt-2 bg-secondary">
 				<thead>
 				<tr>
 					<th scope="col">Min</th>
@@ -89,7 +84,7 @@
 
 		<!-- Button to Open the Modal -->
 		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addStudentModal"><img src="https://i.ibb.co/j43pLX3/black-plus-icon-24.png" width="15" /> Add Student</button>
-			<table style="background-color:#484444" class="table table-hover mt-5">
+			<table class="table table-hover mt-5 bg-secondary">
 			<thead>
 				<tr>
 				<th scope="col">AM</th>
@@ -130,7 +125,7 @@
 <div class="modal" id="addStudentModal">
 	<form th:action="@{/students/addStudent}" method="post">	
 	  	<div class="modal-dialog">
-	    	<div class="modal-content" style="background-color:#383434">
+	    	<div class="modal-content" style="background-color:#6c757d">
 	
 	      <!-- Modal Header -->
 			      <div class="modal-header">
@@ -139,7 +134,7 @@
 			      </div>
 			
 			      <!-- Modal body -->
-			      <div class="modal-body" style="background-color:#383434">
+			      <div class="modal-body" style="background-color:#6c757d">
 			       	
 			       		<label for="input1" class="col-form-label">AM</label>
 			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input1" name="studentid">
@@ -177,7 +172,7 @@
 <div th:each="student : ${students}" th:attr="id=${'deleteModal' + student.studentid}" class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
 	<form th:action="@{/students/deleteStudent/(studentid=${student.studentid})}" method="post">
 	<div class="modal-dialog" role="document">
-    	<div class="modal-content" style="background-color:#383434">
+    	<div class="modal-content" style="background-color:#6c757d">
 		     <div class="modal-header">
 		        <h5 class="modal-title"></h5>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -203,14 +198,14 @@
 <div th:each="student : ${students}" th:attr="id=${'editModal' + student.studentid}" class="modal" role="dialog">
 	<form th:action="@{/students/updateStudent/(studentid=${student.studentid})}" method="post">
 	  <div class="modal-dialog">
-		  <div class="modal-content" style="background-color:#383434">
+		  <div class="modal-content" style="background-color:#6c757d">
 				<div class="modal-header">
 				  <h4 class="modal-title" id="editModal">Update Student</h4>
 				  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 		  
 				<!-- Modal body -->
-				<div class="modal-body" style="background-color:#383434">
+				<div class="modal-body" style="background-color:#6c757d">
 				 
 				  
 					  <label for="studentid" class="col-form-label">AM</label>

@@ -4,16 +4,13 @@
 	<meta charset="UTF-8">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 <title>Courses</title>
 
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-secondary bg-secondary">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
 		  <a class="navbar-brand" href="/home">ClassWeb Beta</a>
 		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +47,7 @@
 		<h1 class="display-4 text-uppercase" style="font-family: 'Verdana'; text-align: center">Courses</h1>
         <hr class="style1 mb-5">
 		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal"><img src="https://i.ibb.co/j43pLX3/black-plus-icon-24.png" width="15" /> Add Course</button>
-			<table class="table table-hover table-bordered mt-5" style="background-color:#484444">
+			<table class="table table-hover table-bordered mt-5 bg-secondary">
 			  <thead>
 			    <tr>
 			      <th scope="col">ID</th>
@@ -88,7 +85,7 @@
 <div class="modal" id="myModal">
 	<form th:action="@{/courses/addCourse}"  method="POST">
 	  	<div class="modal-dialog">
-	    	<div class="modal-content" style="background-color:#383434">
+	    	<div class="modal-content " style="background-color:#6c757d">
 	
 	      <!-- Modal Header -->
 			      <div class="modal-header">
@@ -97,7 +94,7 @@
 			      </div>
 			
 			      <!-- Modal body -->
-			      <div class="modal-body" style="background-color:#383434">
+			      <div class="modal-body" style="background-color:#6c757d">
 			       	
 			       		<label for="input1" class="col-form-label">ID</label>
 			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input1" name="courseid">
@@ -136,7 +133,7 @@
 <div th:each="course : ${courses}" th:attr="id=${'deleteModal' + course.courseid}" class="modal fade" tabindex="-1" role="dialog">
   <form th:action="@{/courses/deleteCourse/(courseid=${course.courseid})}" method="post">
   	<div class="modal-dialog" role="document">
-    	<div class="modal-content" style="background-color:#383434">
+    	<div class="modal-content" style="background-color:#6c757d">
 		     <div class="modal-header">
 				 Delete
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -144,7 +141,9 @@
 		        </button>
 		     </div>
 		     <div class="modal-body">
-		     		Are you sure you want to delete: <div th:text="${course.name}" />
+				 <p class="alert alert-danger">
+		     		Are you sure you want to delete this course?
+				 </p>
 		     </div>
 		     <div class="modal-footer">
 				 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
@@ -159,14 +158,14 @@
 <div th:each="course : ${courses}" th:attr="id=${'editModal' + course.courseid}" class="modal" role="dialog">
   <form th:action="@{/courses/updateCourse/(courseid=${course.courseid})}" method="post">
     <div class="modal-dialog">
-        <div class="modal-content" style="background-color:#383434">
+        <div class="modal-content" style="background-color:#6c757d">
               <div class="modal-header">
                 <h4 class="modal-title" id="editModal">Update Course</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
         
               <!-- Modal body -->
-              <div class="modal-body" style="background-color:#383434">
+              <div class="modal-body" style="background-color:#6c757d">
                
                 
                     <label for="courseid" class="col-form-label">ID</label>
@@ -208,7 +207,7 @@
 </div>
 <div class="container">
 <div style="position: absolute; bottom: 4px;">
-	Copyrights <img src="https://i.ibb.co/m0zgvVR/png-transparent-black-and-white-c-logo-tamil-nadu-copyright-symbol-600-040-copyright-angle-white-spi.png" width="18"/> 2022
+	Copyrights <img src="https://i.ibb.co/5vycsxm/Copyright-Symbol.png" width="27"/> 2022
 </div>
 </div>
 
