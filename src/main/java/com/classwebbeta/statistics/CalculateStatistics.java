@@ -45,7 +45,10 @@ public class CalculateStatistics {
         double skewness = stats.getSkewness();
         double kurtosis = stats.getKurtosis();
         double median = stats.getPercentile(50);
-        int successRate = (success/count)*100;
+        double successD = success;
+        double countD = count;
+        double successRateD = (successD/countD)*100;
+        int successRate = (int)successRateD;
 
         DecimalFormat df = new DecimalFormat("#.##");
         String sd = df.format(standardDeviation).toString();
