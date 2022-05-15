@@ -1,6 +1,6 @@
-# Courses Management Web App
+# Courses Management Web App (Spring Boot Application)
 
-## Spring Boot Application using Thymeleaf API
+## Spring MVC + Thymeleaf
 ### Database
 - PostgreSQL
 
