@@ -29,7 +29,6 @@ public class StudentServiceTest {
         st.setExamGrade("10");
         st.setFinalGrade("10");
         st.setFullname("fullname");
-        st.setPassword("password");
         st.setProjectGrade("10");
         st.setYearOfRegistration(2020);
         st.setYearOfStudies(2);
@@ -52,7 +51,6 @@ public class StudentServiceTest {
         st.setExamGrade("10");
         st.setFinalGrade("10");
         st.setFullname("fullname");
-        st.setPassword("password");
         st.setProjectGrade("10");
         st.setYearOfRegistration(2020);
         st.setYearOfStudies(2);
@@ -74,7 +72,6 @@ public class StudentServiceTest {
         st.setExamGrade("10");
         st.setFinalGrade("10");
         st.setFullname("fullname");
-        st.setPassword("password");
         st.setProjectGrade("10");
         st.setYearOfRegistration(2020);
         st.setYearOfStudies(2);
@@ -83,7 +80,7 @@ public class StudentServiceTest {
         st.setStudentid(1);
         studentService.addStudent(st);
 
-        assertEquals(1, studentService.getAllStudents().size());
+        assertEquals(8, studentService.getAllStudents().size());
     }
 
     @Test
@@ -93,7 +90,6 @@ public class StudentServiceTest {
         st.setExamGrade("10");
         st.setFinalGrade("10");
         st.setFullname("fullname");
-        st.setPassword("password");
         st.setProjectGrade("10");
         st.setYearOfRegistration(2020);
         st.setYearOfStudies(2);
@@ -106,7 +102,7 @@ public class StudentServiceTest {
         List<Student> allByCourse = studentService.getByCourseAttending(null);
         assertNotNull(allByCourse);
 
-        assertEquals("password",allByCourse.get(0).getPassword());
+        assertEquals("email",allByCourse.get(0).getEmail());
     }
 
     @Test
@@ -117,7 +113,6 @@ public class StudentServiceTest {
         st.setExamGrade("10");
         st.setFinalGrade("10");
         st.setFullname("fullname");
-        st.setPassword("password");
         st.setProjectGrade("10");
         st.setYearOfRegistration(2020);
         st.setYearOfStudies(2);
@@ -129,25 +124,6 @@ public class StudentServiceTest {
         assertEquals("email", studentService.getStudent(1).getEmail());
     }
 
-    @Test
-    void testIsValidStudentIdAndEmail() {
-        Student st = new Student();
-        st.setCourseAttending(1);
-        st.setEmail("email");
-        st.setExamGrade("10");
-        st.setFinalGrade("10");
-        st.setFullname("fullname");
-        st.setPassword("password");
-        st.setProjectGrade("10");
-        st.setYearOfRegistration(2020);
-        st.setYearOfStudies(2);
-        st.setSyllabus(1);
-        st.setSemester(1);
-        st.setStudentid(1);
-        studentService.addStudent(st);
-
-        assertEquals(true, studentService.studentAlreadyExists(st));
-    }
 
     @Test
     void testUpdateStudent() {
@@ -157,7 +133,6 @@ public class StudentServiceTest {
         st.setExamGrade("10");
         st.setFinalGrade("10");
         st.setFullname("fullname");
-        st.setPassword("password");
         st.setProjectGrade("10");
         st.setYearOfRegistration(2020);
         st.setYearOfStudies(2);
@@ -172,7 +147,6 @@ public class StudentServiceTest {
         updateSt.setExamGrade("10");
         updateSt.setFinalGrade("10");
         updateSt.setFullname("fullname");
-        updateSt.setPassword("password");
         updateSt.setProjectGrade("10");
         updateSt.setYearOfRegistration(2020);
         updateSt.setYearOfStudies(2);
@@ -183,4 +157,41 @@ public class StudentServiceTest {
 
         assertEquals(updateSt.getEmail(), studentService.getStudent(1).getEmail());
     }
+
+    @Test
+    void testIsValidEmail(){
+        Student st = new Student();
+        st.setCourseAttending(1);
+        st.setEmail("email@gmail.com");
+        st.setExamGrade("10");
+        st.setFinalGrade("10");
+        st.setFullname("fullname");
+        st.setProjectGrade("10");
+        st.setYearOfRegistration(2020);
+        st.setYearOfStudies(2);
+        st.setSyllabus(1);
+        st.setSemester(1);
+        st.setStudentid(1);
+
+        assertEquals(true,studentService.isValidEmail(st));
+    }
+
+    @Test
+    void testIsValidYearOfRegistration(){
+        Student st = new Student();
+        st.setCourseAttending(1);
+        st.setEmail("email@gmail.com");
+        st.setExamGrade("10");
+        st.setFinalGrade("10");
+        st.setFullname("fullname");
+        st.setProjectGrade("10");
+        st.setYearOfRegistration(2020);
+        st.setYearOfStudies(2);
+        st.setSyllabus(1);
+        st.setSemester(1);
+        st.setStudentid(1);
+
+        assertEquals(true,studentService.isValidYearOfRegistration(st));
+    }
+
 }

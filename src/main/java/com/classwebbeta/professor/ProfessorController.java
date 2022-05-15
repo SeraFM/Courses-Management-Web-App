@@ -56,6 +56,7 @@ public class ProfessorController {
     @GetMapping("/courses")
     public String getCoursesPage(Model model){
     	List<Course> course = coursesService.getAllCourses(coursesService.getProfessorID());
+        coursesService.sortCoursesByID(course);
         model.addAttribute("courses", course);
         return "courses_page";
     }

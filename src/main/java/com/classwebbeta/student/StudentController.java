@@ -23,37 +23,42 @@ public class StudentController {
 
     // Add new Student. Post Request to get the data from the Add Student form and put it in the Repository(database)
     @PostMapping("/addStudent")
-    public String addStudent(Student student) {
-        studentService.isValidInputGrade(student);
-        studentService.addStudent(student);
-        return "redirect:/courses/students/?courseAttending=" + studentService.getCourseAttending();
-        /*
-        student.setCourseAttending(studentService.getCourseAttending());
-        // Check if a student with same ID or email already exists Else add student
-        if(studentService.studentAlreadyExists(student)){
+    public String addStudent(Student student, Model error) {
+        // Check if student with this ID or email already exists in the Db
+        if (ObjectUtils.isEmpty(studentService.getStudent(student.getStudentid()))){
+            // Check for valid email and year of register
+            if(studentService.isValidEmail(student) && studentService.isValidYearOfRegistration(student)){
+                studentService.isValidInputGrade(student);
+                studentService.addStudent(student);
+                return "redirect:/courses/students/?courseAttending=" + studentService.getCourseAttending();
+            }else if(!studentService.isValidEmail(student)){
+                error.addAttribute("ErrorMessage",  "Incorrect input: Email. Must be type of: something@mail.com or .gr");
+                return "error_page";
+            }else {
+                error.addAttribute("ErrorMessage", "Incorrect input: Year of Registration. Must be between 2000-2021");
+                return "error_page";
+            }
+        }else{
             error.addAttribute("ErrorMessage", "Student with ID:"+ student.getStudentid() +" or with email:"+ student.getEmail() +" already exists");
             return "error_page";
-        }else{
-            studentService.addStudent(student);
-            return "redirect:/courses/students/?courseAttending=" + studentService.getCourseAttending();
-        }*/
+        }
     }
     
     // Update Student. Post Request to get the data from the Update Student form and put it in the Repository(database)
     @PostMapping(value="/updateStudent")
-    public String updateStudent(Student student) {
-        studentService.isValidInputGrade(student);
-        studentService.updateStudent(student);
-        return "redirect:/courses/students/?courseAttending=" + studentService.getCourseAttending();
-        /*
-        student.setCourseAttending(studentService.getCourseAttending());
-        if (studentService.studentAlreadyExists(student)){
-            error.addAttribute("ErrorMessage", "Student with ID:"+ student.getStudentid() +" or with email:"+ student.getEmail() +" already exists");
-            return "error_page";
-        }else{
+    public String updateStudent(Student student, Model error) {
+        // Check for valid email and year of register
+        if(studentService.isValidEmail(student) && studentService.isValidYearOfRegistration(student)){
+            studentService.isValidInputGrade(student);
             studentService.updateStudent(student);
             return "redirect:/courses/students/?courseAttending=" + studentService.getCourseAttending();
-        }*/
+        }else if(!studentService.isValidEmail(student)){
+            error.addAttribute("ErrorMessage",  "Incorrect input: Email. Must be type of: something@mail.com or .gr");
+            return "error_page";
+        }else {
+            error.addAttribute("ErrorMessage", "Incorrect input: Year of Registration. Must be between 2000-2021");
+            return "error_page";
+        }
     }
       
     // Delete Student by ID 

@@ -28,7 +28,14 @@ public class CoursesService {
 	public List<Course> getAllCourses(Integer professorid) {
         return coursesRepository.findByProfessorid(professorid);
     }
-	
+
+	// Sort all courses by ID
+	public static void sortCoursesByID(List<Course> list) {
+		list.sort((o1, o2)
+				-> o1.getCourseid().compareTo(
+				o2.getCourseid()));
+	}
+
 	// Update Course
 	public void updateCourse(Course course) {
 		coursesRepository.save(course);
@@ -48,5 +55,4 @@ public class CoursesService {
 	public Course getOneCourse(Integer courseid){
 		return coursesRepository.findByCourseid(courseid);
 	}
-
 }

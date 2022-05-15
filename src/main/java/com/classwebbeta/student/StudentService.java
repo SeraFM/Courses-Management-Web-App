@@ -1,6 +1,7 @@
 package com.classwebbeta.student;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,26 +82,29 @@ public class StudentService {
 		studentRepository.delete(student);
 	}
 
-	// Check if student already exists
-	public Boolean studentAlreadyExists(Student student){
-		Integer studentid = student.getStudentid();
-		String email = student.getEmail();
-
-		if (studentRepository.existsById(studentid)) {
-			if (studentRepository.findByStudentid(studentid).getCourseAttending() == getCourseAttending()) {
-				System.out.println("Error. StudentID already exists!");
-				return true;
-			}
+	// Check Valid email
+	public boolean isValidEmail(Student student){
+		if (student.getEmail().contains("@")){
+			return true;
+		}else{
+			return false;
 		}
+	}
 
-		if (studentRepository.existsByEmail(email)){
-			if(studentRepository.findByStudentid(studentid).getCourseAttending() == getCourseAttending()) {
-				System.out.println("Error. Email already exists!");
-				return true;
-			}
+	// Check valid year of registered student
+	public boolean isValidYearOfRegistration(Student student){
+		int year = student.getYearOfRegistration();
+		if (year > 1999 && year < 2022){
+			return  true;
+		}else {
+			return false;
 		}
+	}
 
-		return false;
+	public static void sortStudentsByID(List<Student> list) {
+		list.sort((o1, o2)
+				-> o1.getStudentid().compareTo(
+				o2.getStudentid()));
 	}
 
 	// Check for valid grade inputs

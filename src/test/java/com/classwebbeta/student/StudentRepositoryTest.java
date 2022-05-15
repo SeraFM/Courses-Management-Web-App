@@ -29,7 +29,6 @@ public class StudentRepositoryTest {
         st.setExamGrade("10");
         st.setFinalGrade("10");
         st.setFullname("fullname");
-        st.setPassword("password");
         st.setProjectGrade("10");
         st.setYearOfRegistration(2020);
         st.setYearOfStudies(2);
@@ -49,7 +48,6 @@ public class StudentRepositoryTest {
         st.setExamGrade("10");
         st.setFinalGrade("10");
         st.setFullname("fullname");
-        st.setPassword("password");
         st.setProjectGrade("10");
         st.setYearOfRegistration(2020);
         st.setYearOfStudies(2);
@@ -71,7 +69,6 @@ public class StudentRepositoryTest {
         st.setExamGrade("10");
         st.setFinalGrade("10");
         st.setFullname("fullname");
-        st.setPassword("password");
         st.setProjectGrade("10");
         st.setYearOfRegistration(2020);
         st.setYearOfStudies(2);

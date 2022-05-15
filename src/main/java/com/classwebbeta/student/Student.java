@@ -14,12 +14,8 @@ public class Student {
 	// Database Table Fields
 	@Id
     private Integer studentid;
-
     private String fullname;
-
 	private String email;
-
-	private String password;
 	private Integer yearOfRegistration;
     private Integer yearOfStudies;
     private Integer syllabus;
@@ -33,13 +29,12 @@ public class Student {
 
 	// Getters and Setters
 
-	public Student(Integer studentid, String fullname, String email, String password, Integer yearOfRegistration,
+	public Student(Integer studentid, String fullname, String email, Integer yearOfRegistration,
 			Integer yearOfStudies, Integer syllabus, Integer semester, Integer courseAttending, String projectGrade,
 			String examGrade, String finalGrade) {
 		this.studentid = studentid;
 		this.fullname = fullname;
 		this.email = email;
-		this.password = password;
 		this.yearOfRegistration = yearOfRegistration;
 		this.yearOfStudies = yearOfStudies;
 		this.syllabus = syllabus;
@@ -137,22 +132,11 @@ public class Student {
 		this.examGrade = examGrade;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	@Override
 	public String toString() {
 		return "Student [courseAttending=" + courseAttending + ", email=" + email + ", examGrade=" + examGrade
-				+ ", finalGrade=" + finalGrade + ", fullname=" + fullname + ", password=" + password + ", projectGrade="
+				+ ", finalGrade=" + finalGrade + ", fullname=" + fullname + ", projectGrade="
 				+ projectGrade + ", semester=" + semester + ", studentid=" + studentid + ", syllabus=" + syllabus
 				+ ", yearOfRegistration=" + yearOfRegistration + ", yearOfStudies=" + yearOfStudies + "]";
 	}
-	
-
-	
 }

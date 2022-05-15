@@ -22,7 +22,6 @@ public class CalculateStatisticsTest {
         st.setExamGrade("10");
         st.setFinalGrade("10");
         st.setFullname("fullname");
-        st.setPassword("password");
         st.setProjectGrade("10");
         st.setYearOfRegistration(2020);
         st.setYearOfStudies(2);
@@ -37,7 +36,6 @@ public class CalculateStatisticsTest {
         st2.setExamGrade("10");
         st2.setFinalGrade("10");
         st2.setFullname("fullname");
-        st2.setPassword("password");
         st2.setProjectGrade("10");
         st2.setYearOfRegistration(2020);
         st2.setYearOfStudies(2);

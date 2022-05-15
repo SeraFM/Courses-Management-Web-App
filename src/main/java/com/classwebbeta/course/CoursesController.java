@@ -10,7 +10,11 @@ import com.classwebbeta.statistics.CalculateStatistics;
 import com.classwebbeta.statistics.Statistics;
 import com.classwebbeta.student.Student;
 import com.classwebbeta.student.StudentService;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/courses")
@@ -76,9 +80,8 @@ public class CoursesController {
         // List of Students
     	List<Student> students = studentService.getByCourseAttending(courseAttending);
 
-        for (int i=0; i<students.size(); i++ ){
-            studentService.isValidInputGrade(students.get(i));
-        }
+        studentService.sortStudentsByID(students);
+
         // Model to use it in HTML with Thymeleaf
         model.addAttribute("students", students);
 

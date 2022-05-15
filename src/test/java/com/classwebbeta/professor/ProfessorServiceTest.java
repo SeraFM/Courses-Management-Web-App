@@ -75,6 +75,6 @@ public class ProfessorServiceTest {
         professor.setUsername("username");
         professorService.saveProfessor(professor);
 
-        assertEquals(professor, professorService.getProfessor(professor.getEmail()));
+        assertEquals(professor, professorService.getProfessor(professor.getUsername()));
     }
 }
