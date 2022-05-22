@@ -15,35 +15,37 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ComponentScan(basePackages = "com.classwebbeta.professor")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ProfessorRepositoryTest {
-   
+
     @Autowired
     ProfessorRepository professorRepository;
 
     @Test
     void testFindByUsername() {
         Professor professor = new Professor();
-        professor.setEmail("email@gmail.com");
-        professor.setPassword("password");
-        professor.setPhoneNumber("999999999");
-        professor.setProfessorName("professorName");
+        professor.setEmail("instructor1@uoi.com");
+        professor.setPassword("123456789");
+        professor.setPhoneNumber("6987056473");
+        professor.setProfessorName("Instructor 1");
         professor.setProfessorid(1);
-        professor.setUsername("username");
+        professor.setUsername("instructor1");
         professorRepository.save(professor);
 
-        Assert.assertEquals(professor, professorRepository.findByUsername(professor.getUsername()));
+        Assert.assertEquals(professor.getPassword(), professorRepository.findByUsername(professor.getUsername()).getPassword());
     }
 
     @Test
     void testFindByUsernameAndPassword() {
         Professor professor = new Professor();
-        professor.setEmail("email@gmail.com");
-        professor.setPassword("password");
-        professor.setPhoneNumber("999999999");
-        professor.setProfessorName("professorName");
+        professor.setEmail("instructor1@uoi.com");
+        professor.setPassword("123456789");
+        professor.setPhoneNumber("6987056473");
+        professor.setProfessorName("Instructor 1");
         professor.setProfessorid(1);
-        professor.setUsername("username");
+        professor.setUsername("instructor1");
         professorRepository.save(professor);
 
-        Assert.assertEquals(professor, professorRepository.findByUsernameAndPassword(professor.getUsername(), professor.getPassword()));
+        String username = professorRepository.findByUsernameAndPassword(professor.getUsername(), professor.getPassword()).getUsername();
+
+        Assert.assertEquals(professor.getUsername(),username);
     }
 }

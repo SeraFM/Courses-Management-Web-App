@@ -13,7 +13,8 @@ public class StudentService {
 
 	@Autowired
 	private final StudentRepository studentRepository;
-	
+
+	// Constructor
 	public StudentService(StudentRepository studentRepository) {
 		this.studentRepository = studentRepository;
 	}
@@ -45,11 +46,13 @@ public class StudentService {
     public Integer getProjectGradePR(){
         return projectGradePR;
     }
-    
+
+	// Get all students
 	public List<Student> getAllStudents(){
 		return studentRepository.findAll();
 	}
 
+	// Get a student
 	public Student getStudent(Integer studentid){
 		return studentRepository.findByStudentid(studentid);
 	}
@@ -101,6 +104,7 @@ public class StudentService {
 		}
 	}
 
+	// Sort students list
 	public static void sortStudentsByID(List<Student> list) {
 		list.sort((o1, o2)
 				-> o1.getStudentid().compareTo(
@@ -116,6 +120,7 @@ public class StudentService {
 		}else{
 		  // If project percentage is > 0 then calculate it
 		  if (getProjectGradePR() > 0){
+			  // Calculate grades by percentage
 			  Double projectGradeWithPercentage = Double.parseDouble(student.getProjectGrade())*(getProjectGradePR().floatValue()/100);
 			  Double examGradeWithPercentage = Double.parseDouble(student.getExamGrade())*(getExamGradePR().floatValue()/100);
 			  // If exam grade is < 5 the final grade = exam grade
@@ -123,6 +128,7 @@ public class StudentService {
 				  student.setFinalGrade(student.getExamGrade());
 			  }else{
 				Double finalGrade = examGradeWithPercentage + projectGradeWithPercentage;
+				// Round up the final grade
 				String decimalPart[] = new String[15];
 				decimalPart = String.valueOf(finalGrade).split("");
 				if (Integer.parseInt(decimalPart[2]) > 5){
@@ -133,12 +139,14 @@ public class StudentService {
 					finalGrade = Double.parseDouble(decimalPart[0]) + 0.5;
 				}
 
+				// Set decimal part digits up to 2
 				DecimalFormat df = new DecimalFormat("#.##");
 				student.setFinalGrade(String.valueOf(df.format(finalGrade)).replace(",", "."));
 			  }
-		  }else{
+		  }else{ // Set final grade = exam grade (no project here)
 			  student.setFinalGrade(student.getExamGrade());
 		  }
+		  // Set exam and project grade
 		  student.setExamGrade(student.getExamGrade());
 		  student.setProjectGrade(student.getProjectGrade());
 		}

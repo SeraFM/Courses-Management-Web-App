@@ -19,7 +19,7 @@ public class ClassWebBetaApplication {
 		
 	}
 	
-	// Method to open the browser when main is running
+	// Open the browser at Login URL
 	private static void openHomePage() throws IOException{
 	    Runtime rt = Runtime.getRuntime();
 	    rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://localhost:8080/login");

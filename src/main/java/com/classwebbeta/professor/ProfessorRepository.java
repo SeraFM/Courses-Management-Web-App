@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProfessorRepository extends JpaRepository<Professor, Integer>{
 
-	// Find all professors by a specific username and password (there is only one of course)
+	// Find professor by a specific username and password
 	Professor findByUsernameAndPassword(String username, String password);
+	// Find professor by username
 	Professor findByUsername(String username);
 }

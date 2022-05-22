@@ -7,9 +7,11 @@ import java.util.List;
 @Service
 public class CoursesService {
 
+	// Create CoursesRepository object
 	@Autowired
 	private final CoursesRepository coursesRepository;
-	
+
+	// Constructor
     public CoursesService(CoursesRepository coursesRepository) {
 		this.coursesRepository = coursesRepository;
 	}
@@ -20,6 +22,7 @@ public class CoursesService {
 		return professorID;
 	}
 
+	// To set the professor ID from ProfessorController and use it to get all courses
 	public void setProfessorID(Integer professorID) {
 		this.professorID = professorID;
 	}

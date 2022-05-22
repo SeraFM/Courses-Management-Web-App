@@ -65,15 +65,19 @@ public class ProfessorController {
     @PostMapping("/login")
     public String login(@ModelAttribute Professor professorModel, Model model){
 
-        // Calling a method from Professor Service to check if the inputs are in the database
+        // Calling a method from Professor Service to check if the inputs are in the database (are valid)
         Professor loginProfessor = professorService.authenticate(professorModel.getUsername(), professorModel.getPassword());
 
+        // Check if the professor trying to log in entered valid username and password
         if (ObjectUtils.isEmpty(loginProfessor)){
             model.addAttribute("errorMessage","Wrong Username or Password. Please try again");
             return "login";
         }else{
+            // Get professor info by username
             Professor professor = professorService.getProfessor(loginProfessor.getUsername());
+            // Set professor ID for Course Service to display the courses this specific professor teaches
             coursesService.setProfessorID(professor.getProfessorid());
+            // Display professor name in Home page
             model.addAttribute("userLogin", professor.getProfessorName());
             return "home_page";
         }

@@ -17,6 +17,7 @@ public class Professor {
     private String email;
     private String phoneNumber;
 
+	// Constructor
 	public Professor(Integer professorid, String professorName, String username, String password, String email,
 			String phoneNumber) {
 		this.professorid = professorid;
@@ -27,8 +28,8 @@ public class Professor {
 		this.phoneNumber = phoneNumber;
 	}
 
+	// Default Constructor
 	public Professor(){}
-
 	
 	// Getters and Setters
 	public Integer getProfessorid() {
@@ -66,28 +67,6 @@ public class Professor {
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(email, password, phoneNumber, professorid, professorName, username);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Professor other = (Professor) obj;
-		return Objects.equals(email, other.email) && Objects.equals(password, other.password)
-				&& Objects.equals(phoneNumber, other.phoneNumber) && Objects.equals(professorid, other.professorid)
-				&& Objects.equals(professorName, other.professorName) && Objects.equals(username, other.username);
-	}
-	@Override
-	public String toString() {
-		return "ProfessorModel [professorid=" + professorid + ", professorName=" + professorName + ", username="
-				+ username + ", password=********" + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
 	}
     
 }

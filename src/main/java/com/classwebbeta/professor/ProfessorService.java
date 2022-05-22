@@ -11,12 +11,9 @@ public class ProfessorService {
 	@Autowired
 	private final ProfessorRepository professorRepository;
 
+    // Constructor
     public ProfessorService(ProfessorRepository professorRepository){
         this.professorRepository = professorRepository;
-    }
-
-    public void saveProfessor(Professor professor){
-        professorRepository.save(professor);
     }
 
     // Check if user login is valid (is in the database)  
@@ -29,9 +26,14 @@ public class ProfessorService {
     	return professorRepository.findAll();
     }
 
+    // Get professor by username
     public Professor getProfessor(String username) {
     	return professorRepository.findByUsername(username);
     }
 
+    // Save professor
+    public void saveProfessor(Professor professor){
+        professorRepository.save(professor);
+    }
 	
 }

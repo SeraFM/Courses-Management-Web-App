@@ -19,17 +19,19 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/courses")
 public class CoursesController {
-	
+
+    // Create objects of CoursesService, StudentService
 	@Autowired
 	private final CoursesService coursesService;
 	private final StudentService studentService;
 
+    // Constructor
     public CoursesController(CoursesService coursesService,  StudentService studentService){
     	this.studentService = studentService;
         this.coursesService = coursesService;
     }
 
-    // Add Course using Thymeleaf. PostMapping is an HTTP Request to Add Course here. The value is the HTML url to follow
+    // Add Course using Thymeleaf. PostMapping is an HTTP Request to Add Course here. The value is the HTML url
     @PostMapping("/addCourse")
     public String addCourse(Course course, Model error) {
         // check if the course with this ID already exists in database
@@ -43,12 +45,13 @@ public class CoursesController {
             coursesService.addCourse(course);
             return "redirect:/courses";
         }else{
+            // error
             error.addAttribute("ErrorMessage", "Course with ID:"+ course.getCourseid() +" already exists with name: " + coursesService.getOneCourse(course.getCourseid()).getName());
             return "error_page";
         }
     }
     
-    // Update existing Course using Thymeleaf. The value is the HTML url to follow
+    // Update existing Course using Thymeleaf. The value is the HTML url
     @PostMapping(value="/updateCourse")
     public String updateCourse(Course course) {
         // Set course Professor automatically

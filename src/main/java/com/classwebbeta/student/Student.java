@@ -25,10 +25,10 @@ public class Student {
     private String examGrade;
 	private String finalGrade;
 
+	// Default Constructor
 	public Student(){}
 
-	// Getters and Setters
-
+	// Constructor
 	public Student(Integer studentid, String fullname, String email, Integer yearOfRegistration,
 			Integer yearOfStudies, Integer syllabus, Integer semester, Integer courseAttending, String projectGrade,
 			String examGrade, String finalGrade) {
@@ -45,6 +45,7 @@ public class Student {
 		this.finalGrade = finalGrade;
 	}
 
+	// Getters and Setters
 	public String getFinalGrade() {
 		return finalGrade;
 	}
@@ -55,49 +56,63 @@ public class Student {
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
-	} 
+	}
+
 	public Integer getCourseAttending() {
 		return courseAttending;
 	}
+
 	public void setCourseAttending(Integer courseAttending) {
 		this.courseAttending = courseAttending;
 	}
+
 	public Integer getStudentid() {
 		return studentid;
 	}
+
 	public void setStudentid(Integer studentid) {
 		this.studentid = studentid;
 	}
+
 	public String getFullname() {
 		return fullname;
 	}
+
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
+
 	public Integer getYearOfRegistration() {
 		return yearOfRegistration;
 	}
+
 	public void setYearOfRegistration(Integer yearOfRegistration) {
 		this.yearOfRegistration = yearOfRegistration;
 	}
+
 	public Integer getYearOfStudies() {
 		yearOfStudies = Year.now().getValue() - yearOfRegistration;
 		return yearOfStudies;
 	}
+
 	public void setYearOfStudies(Integer yearOfStudies) {
 		yearOfStudies = Year.now().getValue() - yearOfRegistration;
 		this.yearOfStudies = yearOfStudies;
 	}
+
 	public Integer getSyllabus() {
 		syllabus = Year.now().getValue() - yearOfRegistration;
 		return syllabus;
 	}
+
 	public void setSyllabus(Integer syllabus) {
 		syllabus = Year.now().getValue() - yearOfRegistration;
 		this.syllabus = syllabus;
 	}
+
 	public Integer getSemester() {
 		LocalDate date = LocalDate.now();
 		int month = date.getMonthValue();
@@ -108,6 +123,7 @@ public class Student {
 		}
 		return semester;
 	}
+
 	public void setSemester(Integer semester) {
 		LocalDate date = LocalDate.now();
 		int month = date.getMonthValue();
@@ -119,24 +135,21 @@ public class Student {
 			this.semester = semester;
 		}
 	}
+
 	public String getProjectGrade() {
 		return projectGrade;
 	}
+
 	public void setProjectGrade(String projectGrade) {
 		this.projectGrade = projectGrade;
 	}
+
 	public String getExamGrade() {
 		return examGrade;
 	}
+
 	public void setExamGrade(String examGrade) {
 		this.examGrade = examGrade;
 	}
 
-	@Override
-	public String toString() {
-		return "Student [courseAttending=" + courseAttending + ", email=" + email + ", examGrade=" + examGrade
-				+ ", finalGrade=" + finalGrade + ", fullname=" + fullname + ", projectGrade="
-				+ projectGrade + ", semester=" + semester + ", studentid=" + studentid + ", syllabus=" + syllabus
-				+ ", yearOfRegistration=" + yearOfRegistration + ", yearOfStudies=" + yearOfStudies + "]";
-	}
 }
