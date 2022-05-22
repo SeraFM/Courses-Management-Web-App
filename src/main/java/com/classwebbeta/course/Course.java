@@ -83,12 +83,5 @@ public class Course {
 	public void setProjectPR(Integer examPR) {
 		this.projectPR = 100 - examPR;;
 	}
-
-	@Override
-	public String toString() {
-		return "CoursesModel [courseid=" + courseid + ", name=" + name + ", year=" + year + ", syllabus=" + syllabus
-				+ ", semester=" + semester + /*", attendance=" + attendance +*/ ", professorid=" + professorid + ", examPR="
-				+ examPR + ", projectPR=" + projectPR + "]";
-	}
 	
 }

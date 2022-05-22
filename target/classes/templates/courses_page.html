@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+	
+<title>Courses</title>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+		  <a class="navbar-brand" href="/home">ClassWeb Beta</a>
+		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+	  
+		  <div class="collapse navbar-collapse" id="navbarColor02">
+			<ul class="navbar-nav me-auto">
+			  <li class="nav-item">
+				<a class="nav-link active" href="/home">Home
+				</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="/courses">Courses</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="/about">About</a>
+			  </li>
+			</ul>
+		  </div>
+		  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+			<ul class="navbar-nav ">	  
+				<li class="nav-item">
+					<a class="nav-link" href="/login">Log Out</a>
+				</li>
+			</ul>
+		  </div>
+		</div>
+	  </nav>
+	
+	
+	<div class="container mt-5 mb-2">
+		<div>
+		<h1 class="display-4 text-uppercase" style="font-family: 'Verdana'; text-align: center">Courses</h1>
+        <hr class="style1 mb-5">
+		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal"><img src="https://i.ibb.co/j43pLX3/black-plus-icon-24.png" width="15" /> Add Course</button>
+			<table class="table table-hover table-bordered mt-5 bg-secondary">
+			  <thead>
+			    <tr>
+			      <th scope="col">ID</th>
+			      <th scope="col">Name</th>
+			      <th scope="col">Year</th>
+			      <th scope="col">Syllabus</th>
+			      <th scope="col">Semester</th>
+				  <th scope="col">Exam</th>
+				  <th scope="col">Project</th>
+			      <th scope="col">Actions</th>
+			    </tr>
+			  </thead>
+			   	<tr th:each="course : ${courses}">
+            		<td th:text="${course.courseid}"></td>
+            		<td th:text="${course.name}"></td>
+            		<td th:text="${course.year}"></td>
+            		<td th:text="${course.syllabus}"></td>
+            		<td th:text="${course.semester}"></td>
+					<td th:text="${course.examPR}+'%'"></td>
+					<td th:text="${course.projectPR}+'%'"></td>
+            		<td>
+            			<button data-bs-toggle="modal" th:attr="data-bs-target=${'#editModal' + course.courseid}" data-row="${course}" class="btn btn-sm btn-success"><img src="https://i.ibb.co/YcxKhdh/pencil-removebg-preview.png" width="30" /></button>
+
+            			<button data-bs-toggle="modal" th:attr="data-bs-target=${'#deleteModal' + course.courseid}" data-row="${course}" class="btn btn-sm btn-danger"><img src="https://freesvg.org/img/trash.png" width="30" /></button>
+						
+						<a th:href="@{/courses/students/(courseAttending=${course.courseid})}" class="btn btn-sm btn-warning"><img src="https://i.ibb.co/r6mhLcW/Untitled-design-9-removebg-preview.png" width="30"></a>
+            	    </td>
+        		</tr>
+		</table>
+		</div>
+	</div>
+
+
+<!-- The Add Course Modal -->
+<div class="modal" id="myModal">
+	<form th:action="@{/courses/addCourse}"  method="POST">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content " style="background-color:#6c757d">
+	
+	      <!-- Modal Header -->
+			      <div class="modal-header">
+			        <h4 class="modal-title">Add Course</h4>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			      </div>
+			
+			      <!-- Modal body -->
+			      <div class="modal-body" style="background-color:#6c757d">
+			       	
+			       		<label for="input1" class="col-form-label">ID</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input1" name="courseid">
+
+					  	<label for="input2" class="col-form-label">Name</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input2" name="name">
+			       	
+			       		<label for="input3" class="col-form-label">Year</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input3" name="year">
+			      
+			       		<label for="input4" class="col-form-label">Syllabus</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input4" name="syllabus">
+
+			       		<label for="input5" class="col-form-label">Semester</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input5" name="semester">
+		       	
+						<label for="input6" class="col-form-label">Exam Grade Percentage</label>
+			       		<input style="background-color:#CDCDCD" type="text" class="form-control" id="input6" name="examPR">
+						   
+			      </div>
+			       	
+			
+			      <!-- Modal footer -->
+			      <div class="modal-footer">
+			         <button type="submit" class="btn btn-success">Save</button>
+					 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+			      </div>
+		
+		    </div>
+			</div>
+	</form>
+</div>
+
+
+<!-- The Modal Delete-->
+<div th:each="course : ${courses}" th:attr="id=${'deleteModal' + course.courseid}" class="modal fade" tabindex="-1" role="dialog">
+  <form th:action="@{/courses/deleteCourse/(courseid=${course.courseid})}" method="post">
+  	<div class="modal-dialog" role="document">
+    	<div class="modal-content" style="background-color:#6c757d">
+		     <div class="modal-header">
+				 Delete
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+		        	<span aria-hidden="true">&times;</span>
+		        </button>
+		     </div>
+		     <div class="modal-body">
+				 <p class="alert alert-danger">
+		     		Are you sure you want to delete this course?
+				 </p>
+		     </div>
+		     <div class="modal-footer">
+				 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+		     	 <button type="submit" class="btn btn-danger">Yes, Delete</button>
+		     </div>
+	    </div>
+		</div>
+  </form>
+</div>
+
+<!-- The Modal Update-->
+<div th:each="course : ${courses}" th:attr="id=${'editModal' + course.courseid}" class="modal" role="dialog">
+  <form th:action="@{/courses/updateCourse/(courseid=${course.courseid})}" method="post">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color:#6c757d">
+              <div class="modal-header">
+                <h4 class="modal-title" id="editModal">Update Course</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+        
+              <!-- Modal body -->
+              <div class="modal-body" style="background-color:#6c757d">
+               
+                
+                    <label for="courseid" class="col-form-label">ID</label>
+                    <input style="background-color:#CDCDCD" type="text" readonly="readonly" class="form-control" id="courseid" name="courseid" th:attr="value=${course.courseid}"/>
+                
+                    <label for="name" class="col-form-label">Name</label>
+                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="name" name="name" th:attr="value=${course.name}" />      
+                
+                    <label for="year" class="col-form-label">Year</label>
+                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="year" name="year" th:attr="value=${course.year}" />
+              
+                    <label for="syllabus" class="col-form-label">Syllabus</label>
+                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="syllabus" name="syllabus" th:attr="value=${course.syllabus}" />
+
+                    <label for="semester" class="col-form-label">Semester</label>
+                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="semester" name="semester" th:attr="value=${course.semester}" />
+
+					<label for="examPR" class="col-form-label">Exam Grade Percentage</label>
+                    <input style="background-color:#CDCDCD" type="text" class="form-control" id="examPR" name="examPR" th:attr="value=${course.examPR}" />
+                                       
+              </div>
+       
+              <div class="modal-footer">
+                 <button type="submit" class="btn btn-success">Update</button>
+                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+              </div>
+    
+        </div>
+        </div>
+    </form>    
+ </div>
+
+
+<!-- FOOTER -->
+<div class="container">
+	<div style="position: absolute; bottom: 25px;">
+		A better version of ClassWeb.
+	</div>	
+</div>
+<div class="container">
+<div style="position: absolute; bottom: 4px;">
+	Copyrights <img src="https://i.ibb.co/5vycsxm/Copyright-Symbol.png" width="27"/> 2022
+</div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+
+</body>
+</html>
